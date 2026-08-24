@@ -1,0 +1,63 @@
+name: Daily GitHub Monitor
+
+on:
+  schedule:
+    # 06:00 UTC = 08:00 Paris (CEST)
+    - cron: "0 6 * * *"
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: write    # To read/write state on data branch
+  issues: write      # To create issues
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Checkout state from data branch
+        run: |
+          git fetch origin data || true
+          if git rev-parse --verify origin/data >/dev/null 2>&1; then
+            git checkout origin/data -- state.json || echo '{}' > state.json
+          else
+            echo '{}' > state.json
+          fi
+
+      - name: Create daily-report label if missing
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create "daily-report" --description "Automated daily monitor reports" --color "0e8a16" --repo "${{ github.repository }}" 2>/dev/null || true
+
+      - name: Run monitoring script
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: pwsh
+        run: |
+          ./Scripts/Check-GitHubChanges.ps1 `
+            -PreviousStateJson "state.json" `
+            -OutputStateJson "state.json" `
+            -RepoName "${{ github.repository }}"
+
+      - name: Push updated state to data branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Create or switch to data branch
+          if git rev-parse --verify origin/data >/dev/null 2>&1; then
+            git checkout data
+            git pull origin data
+          else
+            git checkout --orphan data
+            git rm -rf . 2>/dev/null || true
+          fi
+
+          # Copy state file and commit
+          cp "$GITHUB_WORKSPACE/state.json" state.json 2>/dev/null || true
+          git add state.json
+          git diff --cached --quiet || git commit -m "Update state $(date -u +%Y-%m-%d)"
+          git push origin data

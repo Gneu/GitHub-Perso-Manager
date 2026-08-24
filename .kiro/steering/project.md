@@ -4,37 +4,54 @@ inclusion: always
 
 # GitHub Perso Manager — Project Steering
 
-## Project identity
+## What this project does
 
-- **Name:** GitHub Perso Manager
-- **Purpose:** Manage personal GitHub repositories, configurations, and workflows from a single orchestration point.
-- **Scope:** This project lives in a single folder and is itself a GitHub-hosted repository.
+A personal tool to get visibility across all GitHub repos owned by the `Gneu` account.
 
-## Project code and profile
+**Daily automated check (GitHub Actions, 08:00 Paris / 06:00 UTC) creates an issue if:**
+- A new branch exists that is not merged to main
+- A new open PR exists
+- A merged PR's branch has not been deleted
 
-- **Project code:** GHPMGR1
-- **Profile:** Standard feature
+No notification is sent if nothing changed since the last run.
+
+## Scope
+
+- Single-user, personal use only.
+- No delivery process, no project code, no gates. Just build and iterate.
+- Global `~/.kiro/steering/` rules (delivery-process, agent-governance, etc.) do **not** apply here.
+
+## Architecture
+
+| Component | Location | Purpose |
+|---|---|---|
+| Monitoring script | `Scripts/Check-GitHubChanges.ps1` | Scans all repos, diffs state, creates issue |
+| GitHub Actions workflow | `.github/workflows/daily-monitor.yml` | Cron trigger, orchestrates run |
+| State file | `state.json` on `data` branch | Previous-run snapshot for change detection |
+| Issues | This repo's Issues tab | Notification delivery with full detail |
+
+**State management:** `state.json` lives on an orphan `data` branch to keep `master` clean. The workflow checks it out before the script runs, then pushes the updated version back after.
+
+**Notification:** One issue per change-day, labelled `daily-report`. Contains markdown tables with repo, branch, PR, author, dates, and links.
 
 ## Folder structure
 
 | Folder | Purpose |
 |---|---|
-| `Scripts/` | Reusable PowerShell scripts for GitHub operations |
+| `Scripts/` | Reusable PowerShell scripts |
 | `Scripts/_archive/` | Superseded scripts |
-| `Documentation/` | Project docs, evolution log, generated references |
-| `.kiro/steering/` | Project-local steering (committed) |
-
-Folders deliberately skipped (not applicable to this code-only project):
-`Inputs/`, `Backups/`, `Exports/`, `PQ/`.
+| `Documentation/` | Any docs if needed |
+| `.github/workflows/` | GitHub Actions definitions |
 
 ## Technology
 
-- **Language:** PowerShell (primary), potentially Python for GitHub API work.
-- **External APIs:** GitHub REST/GraphQL API via `gh` CLI or direct HTTP.
-- **Credentials:** GitHub PAT or `gh` CLI auth — never stored in tracked files. Use `gh auth` or environment variables.
+- **PowerShell** (pwsh 7, runs on ubuntu-latest in Actions)
+- **GitHub CLI (`gh`)** — all API calls, issue creation
+- **GitHub Actions** — scheduling, orchestration
+- **No credentials to manage** — uses built-in `GITHUB_TOKEN`
 
 ## Conventions
 
-- Scripts target PowerShell 5.1+ (Windows built-in) unless a feature requires pwsh 7.
-- Use `gh` CLI where practical; fall back to REST API with `Invoke-RestMethod` when `gh` lacks coverage.
-- All scripts are idempotent where feasible.
+- Scripts are idempotent where feasible.
+- Output goes to GitHub Issues (notification) or console (debug).
+- Keep it simple. No over-engineering for a personal dashboard.

@@ -1,28 +1,47 @@
 # GitHub Perso Manager
 
-Orchestration repo for managing personal GitHub repositories, configurations, and workflows.
+Daily automated monitor for all GitHub repos under the `Gneu` account. Creates a GitHub issue when something changes.
+
+## What it detects
+
+| Trigger | Example |
+|---|---|
+| New branch not merged to main | `feature/auth` created on `repo-x` |
+| New open PR | PR #42 opened on `repo-y` |
+| Merged PR branch not deleted | `fix/typo` still exists after PR #10 was merged |
+
+## How it works
+
+1. **GitHub Actions** runs daily at 08:00 Paris time (06:00 UTC).
+2. A PowerShell script scans all owned repos via `gh` CLI.
+3. Current state (branches, PRs, stale branches) is compared against the previous run's snapshot.
+4. If changes are found → an issue is created in this repo with full details.
+5. If nothing changed → no issue, no noise.
+
+State is stored as `state.json` on a dedicated `data` branch.
 
 ## Structure
 
 ```
-Scripts/            Reusable PowerShell scripts for GitHub operations
-Scripts/_archive/   Superseded scripts kept for reference
-Documentation/      Project documentation and evolution log
-.kiro/steering/     Project-local Kiro steering (committed)
+Scripts/                        PowerShell automation scripts
+Scripts/_archive/               Superseded scripts
+Documentation/                  Project docs
+.github/workflows/              GitHub Actions workflow definitions
+.kiro/steering/                 Project-local Kiro steering
 ```
 
-## Technology
+## Manual trigger
 
-- **PowerShell** for automation scripts
-- **GitHub CLI (`gh`)** as the primary interface to GitHub APIs
-- **GitHub REST/GraphQL API** via `Invoke-RestMethod` where `gh` lacks coverage
+You can run the workflow manually from the Actions tab → "Daily GitHub Monitor" → "Run workflow".
 
-## Getting started
+## Local testing
 
-1. Ensure `gh` CLI is installed and authenticated (`gh auth status`).
-2. Clone this repo.
-3. Run scripts from the `Scripts/` folder as needed.
+```powershell
+# Dry run (no issue created, just prints what would be reported)
+./Scripts/Check-GitHubChanges.ps1 -DryRun
+```
 
-## Credentials
+## Requirements
 
-No credentials are stored in this repository. Authentication relies on `gh auth` or environment variables.
+- `gh` CLI authenticated (`gh auth status`)
+- PowerShell 7+ (for local runs; Actions uses ubuntu pwsh)

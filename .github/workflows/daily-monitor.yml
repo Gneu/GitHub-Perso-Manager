@@ -34,7 +34,7 @@ jobs:
 
       - name: Run monitoring script
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         shell: pwsh
         run: |
           ./Scripts/Check-GitHubChanges.ps1 `

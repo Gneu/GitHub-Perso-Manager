@@ -8,8 +8,8 @@
 
 .DESCRIPTION
     Designed to run in GitHub Actions (pwsh 7 on ubuntu-latest).
-    Uses gh CLI for all API calls.
-    State is read/written as JSON (passed in/out via parameters).
+    Uses gh CLI for all API calls. Avoids --paginate parsing issues by using
+    gh's native --json flag which handles pagination internally.
 
 .PARAMETER PreviousStateJson
     Path to the previous state JSON file. If not found, treats everything as new (first run).
@@ -36,126 +36,70 @@ $ErrorActionPreference = "Stop"
 
 # --- Helper functions ---
 
-function Invoke-GhApi {
-    <#
-    .SYNOPSIS
-        Calls gh api and returns parsed JSON. Handles pagination reliably.
-        gh api --paginate outputs concatenated JSON arrays: [...][...]
-        We use --slurp with --jq to merge them into a single array.
-    #>
-    param(
-        [string]$Endpoint,
-        [switch]$Paginate
-    )
-
-    if ($Paginate) {
-        # --paginate + --jq 'add' merges all pages into one flat array
-        $raw = (gh api $Endpoint --paginate --jq '[.[]]+[]' 2>$null) -join ""
-        # Fallback: use a temp file approach for reliable parsing
-        $tempFile = [System.IO.Path]::GetTempFileName()
-        try {
-            gh api $Endpoint --paginate 2>$null | Set-Content -Path $tempFile -Encoding UTF8
-            $content = Get-Content -Path $tempFile -Raw
-            if (-not $content -or $content.Trim() -eq "") { return @() }
-            # gh api --paginate outputs ][  between pages. Replace ][ with , to make valid JSON.
-            $content = $content -replace '\]\s*\[', ','
-            return @($content | ConvertFrom-Json)
-        }
-        finally {
-            Remove-Item $tempFile -ErrorAction SilentlyContinue
-        }
-    }
-    else {
-        $raw = (gh api $Endpoint 2>$null) -join "`n"
-        if (-not $raw -or $raw.Trim() -eq "") { return @() }
-        return ($raw | ConvertFrom-Json)
-    }
-}
-
 function Get-AllRepos {
     <#
     .SYNOPSIS
         Fetches all non-archived, non-fork repos owned by the authenticated user.
+        Uses 'gh repo list' which handles pagination natively.
     #>
-    $allRepos = Invoke-GhApi -Endpoint "user/repos?per_page=100&type=owner&sort=full_name" -Paginate
-
-    $repos = @()
-    foreach ($r in $allRepos) {
-        if (-not $r.archived -and -not $r.fork) {
-            $repos += $r.full_name
-        }
-    }
-    return $repos
+    $json = gh repo list --no-archived --source --json nameWithOwner --limit 200 2>$null
+    if (-not $json) { return @() }
+    $repos = ($json | ConvertFrom-Json)
+    return @($repos | ForEach-Object { $_.nameWithOwner })
 }
 
-function Get-DefaultBranch {
-    param([string]$Repo)
-    $repoInfo = Invoke-GhApi -Endpoint "repos/$Repo"
-    if ($repoInfo -and $repoInfo.default_branch) {
-        return $repoInfo.default_branch
-    }
-    return "main"
-}
-
-function Get-Branches {
+function Get-RepoBranches {
     <#
     .SYNOPSIS
-        Gets all branches for a repo, excluding the default branch.
+        Gets all branches for a repo excluding the default branch.
+        Uses gh api with --jq to output clean newline-separated names.
     #>
-    param([string]$Repo, [string]$DefaultBranch)
+    param([string]$Repo)
 
-    $allBranches = Invoke-GhApi -Endpoint "repos/$Repo/branches?per_page=100" -Paginate
-    $branches = @()
-    foreach ($b in $allBranches) {
-        if ($b.name -ne $DefaultBranch) {
-            $branches += $b.name
-        }
-    }
-    return $branches
+    # Get default branch
+    $defaultBranch = (gh repo view $Repo --json defaultBranchRef --jq '.defaultBranchRef.name' 2>$null)
+    if (-not $defaultBranch) { $defaultBranch = "main" }
+    $defaultBranch = $defaultBranch.Trim()
+
+    # Get all branch names as newline-separated text
+    $branchNames = gh api "repos/$Repo/branches" --paginate --jq '.[].name' 2>$null
+    if (-not $branchNames) { return @(), $defaultBranch }
+
+    $branches = @($branchNames | ForEach-Object { $_.Trim() } | Where-Object { $_ -ne "" -and $_ -ne $defaultBranch })
+    return $branches, $defaultBranch
 }
 
 function Get-OpenPRs {
     <#
     .SYNOPSIS
-        Gets all open PRs for a repo.
+        Gets all open PRs for a repo using gh pr list (handles pagination natively).
     #>
     param([string]$Repo)
 
-    $allPRs = Invoke-GhApi -Endpoint "repos/$Repo/pulls?state=open&per_page=100" -Paginate
-    $prs = @()
-    foreach ($pr in $allPRs) {
-        $prs += [PSCustomObject]@{
-            number      = $pr.number
-            title       = $pr.title
-            author      = $pr.user.login
-            head_branch = $pr.head.ref
-            created_at  = $pr.created_at
-            url         = $pr.html_url
-        }
-    }
+    $json = gh pr list --repo $Repo --state open --json number,title,author,headRefName,createdAt,url --limit 200 2>$null
+    if (-not $json) { return @() }
+    $prs = @($json | ConvertFrom-Json)
     return $prs
 }
 
 function Get-MergedPRsWithStaleBranches {
     <#
     .SYNOPSIS
-        Finds PRs that were merged but whose head branch still exists in the repo.
+        Finds recently merged PRs whose head branch still exists.
     #>
     param([string]$Repo, [string[]]$ExistingBranches)
 
     if (-not $ExistingBranches -or $ExistingBranches.Count -eq 0) { return @() }
 
-    $allPRs = Invoke-GhApi -Endpoint "repos/$Repo/pulls?state=closed&per_page=100" -Paginate
+    # Get recently closed (merged) PRs
+    $json = gh pr list --repo $Repo --state merged --json number,title,headRefName,mergedAt,url --limit 200 2>$null
+    if (-not $json) { return @() }
+    $mergedPRs = @($json | ConvertFrom-Json)
+
     $stale = @()
-    foreach ($pr in $allPRs) {
-        if ($pr.merged_at -and ($ExistingBranches -contains $pr.head.ref)) {
-            $stale += [PSCustomObject]@{
-                number      = $pr.number
-                title       = $pr.title
-                head_branch = $pr.head.ref
-                merged_at   = $pr.merged_at
-                url         = $pr.html_url
-            }
+    foreach ($pr in $mergedPRs) {
+        if ($ExistingBranches -contains $pr.headRefName) {
+            $stale += $pr
         }
     }
     return $stale
@@ -173,7 +117,6 @@ if (Test-Path $PreviousStateJson) {
     if ($content -and $content.Trim() -ne "" -and $content.Trim() -ne "{}") {
         Write-Host "Loading previous state from: $PreviousStateJson"
         $loaded = $content | ConvertFrom-Json
-        # Convert PSObject properties to hashtable for easy lookup
         if ($loaded.branches) {
             $loaded.branches.PSObject.Properties | ForEach-Object { $previousState.branches[$_.Name] = $_.Value }
         }
@@ -201,8 +144,9 @@ Write-Host "Found $($repos.Count) repos to scan."
 foreach ($repo in $repos) {
     Write-Host "  Scanning: $repo" -ForegroundColor Gray
 
-    $defaultBranch = Get-DefaultBranch -Repo $repo
-    $branches = Get-Branches -Repo $repo -DefaultBranch $defaultBranch
+    $branchResult = Get-RepoBranches -Repo $repo
+    $branches = $branchResult[0]
+    $defaultBranch = $branchResult[1]
 
     # Track branches (non-default)
     foreach ($branch in $branches) {
@@ -221,9 +165,9 @@ foreach ($repo in $repos) {
             repo        = $repo
             number      = $pr.number
             title       = $pr.title
-            author      = $pr.author
-            head_branch = $pr.head_branch
-            created_at  = $pr.created_at
+            author      = $pr.author.login
+            head_branch = $pr.headRefName
+            created_at  = $pr.createdAt
             url         = $pr.url
         }
     }
@@ -231,13 +175,13 @@ foreach ($repo in $repos) {
     # Track stale merged-PR branches
     $staleBranches = Get-MergedPRsWithStaleBranches -Repo $repo -ExistingBranches $branches
     foreach ($stale in $staleBranches) {
-        $key = "$repo/$($stale.head_branch)"
+        $key = "$repo/$($stale.headRefName)"
         $currentState.stale_branches[$key] = @{
             repo        = $repo
             number      = $stale.number
             title       = $stale.title
-            head_branch = $stale.head_branch
-            merged_at   = $stale.merged_at
+            head_branch = $stale.headRefName
+            merged_at   = $stale.mergedAt
             url         = $stale.url
         }
     }

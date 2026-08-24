@@ -44,7 +44,8 @@ function Get-AllRepos {
     #>
     $raw = (gh api "user/repos?per_page=100&type=owner&sort=full_name&affiliation=owner" --jq '.[].full_name' --paginate 2>$null)
     if (-not $raw) { return ,@() }
-    [string[]]$names = @($raw | ForEach-Object { $_.Trim() } | Where-Object { $_ -ne "" })
+    # Filter to only valid "owner/repo" format lines (skip any JSON error fragments)
+    [string[]]$names = @($raw | ForEach-Object { $_.Trim() } | Where-Object { $_ -match '^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$' })
     Write-Host "  (API returned $($names.Count) repo names)"
     return ,$names
 }
@@ -280,7 +281,7 @@ if ($hasChanges) {
     }
     else {
         Write-Host "Creating issue in $RepoName..."
-        $body | gh issue create --repo $RepoName --title $title --label "daily-report" --body-stdin
+        $body | gh issue create --repo $RepoName --title $title --label "daily-report" --body-file -
         Write-Host "Issue created." -ForegroundColor Green
     }
 }

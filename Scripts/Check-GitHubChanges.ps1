@@ -40,6 +40,8 @@ function Invoke-GhApi {
     <#
     .SYNOPSIS
         Calls gh api and returns parsed JSON. Handles pagination.
+        gh api --paginate concatenates JSON arrays like [...][\n]...
+        We use --jq '.[]' to flatten them into one object per line.
     #>
     param(
         [string]$Endpoint,
@@ -47,7 +49,8 @@ function Invoke-GhApi {
     )
 
     if ($Paginate) {
-        $raw = gh api $Endpoint --paginate 2>$null
+        # Use --jq '.[]' to emit one JSON object per line, avoiding concatenated arrays
+        $raw = gh api $Endpoint --paginate --jq '.[]' 2>$null
     }
     else {
         $raw = gh api $Endpoint 2>$null
@@ -55,10 +58,27 @@ function Invoke-GhApi {
 
     if (-not $raw) { return @() }
 
-    # gh api --paginate can return multiple JSON arrays concatenated
-    # Join them and parse
     $joined = ($raw -join "`n")
-    return ($joined | ConvertFrom-Json)
+
+    if ($Paginate) {
+        # Each line is a JSON object — wrap in array brackets for parsing
+        $asArray = "[" + ($joined -replace "`n}", "},`n" -replace "}`n{", "},{") + "]"
+        # Simpler: just let ConvertFrom-Json handle multiple JSON objects
+        try {
+            return @($joined | ConvertFrom-Json)
+        }
+        catch {
+            # Fallback: parse line by line
+            $results = @()
+            foreach ($line in ($raw | Where-Object { $_.Trim() -ne "" })) {
+                $results += ($line | ConvertFrom-Json)
+            }
+            return $results
+        }
+    }
+    else {
+        return ($joined | ConvertFrom-Json)
+    }
 }
 
 function Get-AllRepos {

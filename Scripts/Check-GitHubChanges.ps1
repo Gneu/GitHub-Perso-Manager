@@ -40,13 +40,23 @@ function Get-AllRepos {
     <#
     .SYNOPSIS
         Fetches all non-archived, non-fork repos accessible to the authenticated token.
-        Uses gh api which respects the token's repo access.
+        Uses gh repo list which handles pagination and auth properly.
     #>
-    $raw = (gh api "user/repos?per_page=100&type=owner&sort=full_name&affiliation=owner" --jq '.[].full_name' --paginate 2>$null)
-    if (-not $raw) { return ,@() }
-    # Filter to only valid "owner/repo" format lines (skip any JSON error fragments)
-    [string[]]$names = @($raw | ForEach-Object { $_.Trim() } | Where-Object { $_ -match '^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$' })
-    Write-Host "  (API returned $($names.Count) repo names)"
+    $raw = gh repo list --no-archived --source --json nameWithOwner --limit 200 2>$null
+    if (-not $raw) {
+        Write-Host "  (gh repo list returned nothing, trying API fallback)"
+        $raw = gh api "user/repos?per_page=100&type=owner" --jq '.[] | select(.archived == false and .fork == false) | .full_name' --paginate 2>$null
+        if (-not $raw) { return ,@() }
+        [string[]]$names = @($raw | ForEach-Object { $_.Trim() } | Where-Object { $_ -ne "" -and $_ -notmatch '^\s*[\{\}":]' })
+        Write-Host "  (API fallback returned $($names.Count) repos)"
+        return ,$names
+    }
+
+    $joined = ($raw -join "`n")
+    if ($joined.Trim() -eq "" -or $joined.Trim() -eq "[]") { return ,@() }
+    $parsed = @($joined | ConvertFrom-Json)
+    [string[]]$names = @($parsed | ForEach-Object { $_.nameWithOwner })
+    Write-Host "  (gh repo list returned $($names.Count) repos)"
     return ,$names
 }
 

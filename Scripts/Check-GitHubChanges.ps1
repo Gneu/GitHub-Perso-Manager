@@ -31,7 +31,7 @@ param(
     [switch]$DryRun
 )
 
-Set-StrictMode -Version Latest
+Set-StrictMode -Version 2
 $ErrorActionPreference = "Stop"
 
 # --- Helper functions ---
@@ -43,13 +43,13 @@ function Get-AllRepos {
         Uses 'gh repo list' which handles pagination natively.
     #>
     $raw = (gh repo list --no-archived --source --json nameWithOwner --limit 200 2>$null) -join "`n"
-    if (-not $raw -or $raw.Trim() -eq "") { return @() }
-    $repos = @($raw | ConvertFrom-Json)
-    $names = [System.Collections.ArrayList]::new()
-    foreach ($r in $repos) {
-        [void]$names.Add($r.nameWithOwner)
+    if (-not $raw -or $raw.Trim() -eq "" -or $raw.Trim() -eq "[]") { return ,@() }
+    $parsed = $raw | ConvertFrom-Json
+    [string[]]$names = @()
+    foreach ($r in $parsed) {
+        $names += $r.nameWithOwner
     }
-    return $names
+    return ,$names
 }
 
 function Get-RepoBranches {
@@ -57,7 +57,7 @@ function Get-RepoBranches {
     .SYNOPSIS
         Gets all branches for a repo excluding the default branch.
         Uses gh api with --jq to output clean newline-separated names.
-        Returns a hashtable with 'branches' (array) and 'defaultBranch' (string).
+        Returns a hashtable with 'branches' (string array) and 'defaultBranch' (string).
     #>
     param([string]$Repo)
 
@@ -69,14 +69,14 @@ function Get-RepoBranches {
     # Get all branch names as newline-separated text
     $branchLines = gh api "repos/$Repo/branches" --paginate --jq '.[].name' 2>$null
     if (-not $branchLines) {
-        return @{ branches = @(); defaultBranch = $defaultBranch }
+        return @{ branches = [string[]]@(); defaultBranch = $defaultBranch }
     }
 
-    $branches = [System.Collections.ArrayList]::new()
+    [string[]]$branches = @()
     foreach ($line in $branchLines) {
         $name = $line.Trim()
         if ($name -ne "" -and $name -ne $defaultBranch) {
-            [void]$branches.Add($name)
+            $branches += $name
         }
     }
     return @{ branches = $branches; defaultBranch = $defaultBranch }
@@ -101,20 +101,20 @@ function Get-MergedPRsWithStaleBranches {
     #>
     param([string]$Repo, [string[]]$ExistingBranches)
 
-    if (-not $ExistingBranches -or $ExistingBranches.Count -eq 0) { return @() }
+    if (-not $ExistingBranches -or $ExistingBranches.Count -eq 0) { return ,@() }
 
     # Get recently closed (merged) PRs
     $raw = (gh pr list --repo $Repo --state merged --json number,title,headRefName,mergedAt,url --limit 200 2>$null) -join "`n"
-    if (-not $raw -or $raw.Trim() -eq "" -or $raw.Trim() -eq "[]") { return @() }
+    if (-not $raw -or $raw.Trim() -eq "" -or $raw.Trim() -eq "[]") { return ,@() }
     $mergedPRs = @($raw | ConvertFrom-Json)
 
-    $stale = [System.Collections.ArrayList]::new()
+    $stale = @()
     foreach ($pr in $mergedPRs) {
         if ($ExistingBranches -contains $pr.headRefName) {
-            [void]$stale.Add($pr)
+            $stale += $pr
         }
     }
-    return $stale
+    return ,$stale
 }
 
 # --- Main logic ---

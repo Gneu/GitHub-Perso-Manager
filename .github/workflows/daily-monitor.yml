@@ -43,7 +43,12 @@ jobs:
             -RepoName "${{ github.repository }}"
 
       - name: Push updated state to data branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Save state file path before branch switch
+          cp state.json /tmp/state.json
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
@@ -57,7 +62,7 @@ jobs:
           fi
 
           # Copy state file and commit
-          cp "$GITHUB_WORKSPACE/state.json" state.json 2>/dev/null || true
+          cp /tmp/state.json state.json
           git add state.json
           git diff --cached --quiet || git commit -m "Update state $(date -u +%Y-%m-%d)"
           git push origin data

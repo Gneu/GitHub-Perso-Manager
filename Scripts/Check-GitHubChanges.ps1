@@ -39,10 +39,10 @@ $ErrorActionPreference = "Stop"
 function Get-AllRepos {
     <#
     .SYNOPSIS
-        Fetches all non-archived, non-fork repos owned by the authenticated user.
+        Fetches all non-archived, non-fork repos owned by the Gneu account.
         Uses 'gh repo list' which handles pagination natively.
     #>
-    $raw = (gh repo list --no-archived --source --json nameWithOwner --limit 200 2>$null) -join "`n"
+    $raw = (gh repo list Gneu --no-archived --source --json nameWithOwner --limit 200 2>$null) -join "`n"
     if (-not $raw -or $raw.Trim() -eq "" -or $raw.Trim() -eq "[]") { return ,@() }
     $parsed = $raw | ConvertFrom-Json
     [string[]]$names = @()

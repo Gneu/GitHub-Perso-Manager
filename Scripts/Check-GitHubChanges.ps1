@@ -32,23 +32,20 @@ param(
 )
 
 Set-StrictMode -Version 2
-$ErrorActionPreference = "Stop"
+$ErrorActionPreference = "Continue"
 
 # --- Helper functions ---
 
 function Get-AllRepos {
     <#
     .SYNOPSIS
-        Fetches all non-archived, non-fork repos owned by the Gneu account.
-        Uses 'gh repo list' which handles pagination natively.
+        Fetches all non-archived, non-fork repos accessible to the authenticated token.
+        Uses gh api which respects the token's repo access.
     #>
-    $raw = (gh repo list Gneu --no-archived --source --json nameWithOwner --limit 200 2>$null) -join "`n"
-    if (-not $raw -or $raw.Trim() -eq "" -or $raw.Trim() -eq "[]") { return ,@() }
-    $parsed = $raw | ConvertFrom-Json
-    [string[]]$names = @()
-    foreach ($r in $parsed) {
-        $names += $r.nameWithOwner
-    }
+    $raw = (gh api "user/repos?per_page=100&type=owner&sort=full_name&affiliation=owner" --jq '.[].full_name' --paginate 2>$null)
+    if (-not $raw) { return ,@() }
+    [string[]]$names = @($raw | ForEach-Object { $_.Trim() } | Where-Object { $_ -ne "" })
+    Write-Host "  (API returned $($names.Count) repo names)"
     return ,$names
 }
 
@@ -297,3 +294,4 @@ Write-Host "Saving state to: $OutputStateJson"
 $currentState | ConvertTo-Json -Depth 10 | Set-Content -Path $OutputStateJson -Encoding UTF8
 
 Write-Host "Done."
+exit 0

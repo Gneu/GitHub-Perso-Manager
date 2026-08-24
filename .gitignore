@@ -1,0 +1,17 @@
+# Source material (read-only, potentially large/credential-bearing)
+Inputs/
+
+# Regenerable outputs
+Backups/
+Exports/
+PQ/
+
+# Excel lock/temp files
+~$*
+*.tmp
+
+# Large regenerable exports
+*.csv
+
+# Kiro MCP server configs (may contain credentials in plaintext headers)
+.kiro/settings/

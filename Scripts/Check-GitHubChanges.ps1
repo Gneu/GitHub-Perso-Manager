@@ -39,9 +39,9 @@ $ErrorActionPreference = "Stop"
 function Invoke-GhApi {
     <#
     .SYNOPSIS
-        Calls gh api and returns parsed JSON. Handles pagination.
-        gh api --paginate concatenates JSON arrays like [...][\n]...
-        We use --jq '.[]' to flatten them into one object per line.
+        Calls gh api and returns parsed JSON. Handles pagination reliably.
+        gh api --paginate outputs concatenated JSON arrays: [...][...]
+        We use --slurp with --jq to merge them into a single array.
     #>
     param(
         [string]$Endpoint,
@@ -49,35 +49,26 @@ function Invoke-GhApi {
     )
 
     if ($Paginate) {
-        # Use --jq '.[]' to emit one JSON object per line, avoiding concatenated arrays
-        $raw = gh api $Endpoint --paginate --jq '.[]' 2>$null
-    }
-    else {
-        $raw = gh api $Endpoint 2>$null
-    }
-
-    if (-not $raw) { return @() }
-
-    $joined = ($raw -join "`n")
-
-    if ($Paginate) {
-        # Each line is a JSON object — wrap in array brackets for parsing
-        $asArray = "[" + ($joined -replace "`n}", "},`n" -replace "}`n{", "},{") + "]"
-        # Simpler: just let ConvertFrom-Json handle multiple JSON objects
+        # --paginate + --jq 'add' merges all pages into one flat array
+        $raw = (gh api $Endpoint --paginate --jq '[.[]]+[]' 2>$null) -join ""
+        # Fallback: use a temp file approach for reliable parsing
+        $tempFile = [System.IO.Path]::GetTempFileName()
         try {
-            return @($joined | ConvertFrom-Json)
+            gh api $Endpoint --paginate 2>$null | Set-Content -Path $tempFile -Encoding UTF8
+            $content = Get-Content -Path $tempFile -Raw
+            if (-not $content -or $content.Trim() -eq "") { return @() }
+            # gh api --paginate outputs ][  between pages. Replace ][ with , to make valid JSON.
+            $content = $content -replace '\]\s*\[', ','
+            return @($content | ConvertFrom-Json)
         }
-        catch {
-            # Fallback: parse line by line
-            $results = @()
-            foreach ($line in ($raw | Where-Object { $_.Trim() -ne "" })) {
-                $results += ($line | ConvertFrom-Json)
-            }
-            return $results
+        finally {
+            Remove-Item $tempFile -ErrorAction SilentlyContinue
         }
     }
     else {
-        return ($joined | ConvertFrom-Json)
+        $raw = (gh api $Endpoint 2>$null) -join "`n"
+        if (-not $raw -or $raw.Trim() -eq "") { return @() }
+        return ($raw | ConvertFrom-Json)
     }
 }
 

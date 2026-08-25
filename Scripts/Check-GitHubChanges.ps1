@@ -143,7 +143,8 @@ function Write-ReportJson {
         [string]$Title,
         [string]$Body,
         [AllowNull()][string]$IssueUrl,
-        [bool]$Forced
+        [bool]$Forced,
+        [hashtable]$Changes
     )
 
     if (-not $Path) { return }
@@ -158,7 +159,13 @@ function Write-ReportJson {
         issue_url = $IssueUrl
         forced = $Forced
         generated_at = (Get-Date).ToUniversalTime().ToString("o")
-    } | ConvertTo-Json -Depth 5 | Set-Content -Path $Path -Encoding UTF8
+        summary = [ordered]@{
+            unmerged_branch_count = @($Changes.branches).Count
+            open_pr_count = @($Changes.open_prs).Count
+            stale_merged_branch_count = @($Changes.stale_merged_branches).Count
+        }
+        changes = $Changes
+    } | ConvertTo-Json -Depth 10 | Set-Content -Path $Path -Encoding UTF8
     Write-Host "Wrote delivery report: $Path"
 }
 
@@ -285,7 +292,12 @@ if ($hasChanges) {
         Write-Host "Issue created: $issueUrl" -ForegroundColor Green
     }
 
-    Write-ReportJson -Path $ReportJsonPath -Title $title -Body $body -IssueUrl $issueUrl -Forced ([bool]$ForceReport)
+    $changes = [ordered]@{
+        branches = @($newBranches)
+        open_prs = @($newPRs)
+        stale_merged_branches = @($newStaleBranches)
+    }
+    Write-ReportJson -Path $ReportJsonPath -Title $title -Body $body -IssueUrl $issueUrl -Forced ([bool]$ForceReport) -Changes $changes
 }
 else {
     Write-Host "No changes detected. No issue created." -ForegroundColor Green

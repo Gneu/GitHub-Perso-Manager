@@ -28,7 +28,7 @@ These are practical signals, not formal GitHub ownership metadata.
 When changes are found, the workflow:
 
 1. Creates a `daily-report` issue in this repository with the full Markdown report.
-2. Sends the same report as a UTF-8 plain-text email to `fabrice.r@gmail.com`, including the issue link.
+2. Sends the same monitored items as a structured HTML email to `fabrice.r@gmail.com`, with a plain-text fallback and the issue link.
 3. Updates the `data` branch baseline only after email delivery succeeds.
 
 If nothing changed, it sends no email and creates no issue.

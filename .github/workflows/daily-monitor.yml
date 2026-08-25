@@ -76,7 +76,9 @@ jobs:
           import os
           import smtplib
           import ssl
+          from datetime import datetime, timezone
           from email.message import EmailMessage
+          from html import escape
 
           password = os.environ.get("GMAIL_APP_PASSWORD", "").replace(" ", "")
           if not password:
@@ -86,15 +88,149 @@ jobs:
               report = json.load(report_file)
 
           recipient = "fabrice.r@gmail.com"
-          body = report["body"]
+          changes = report.get("changes", {})
+          branches = changes.get("branches", [])
+          open_prs = changes.get("open_prs", [])
+          stale_branches = changes.get("stale_merged_branches", [])
+          summary = report.get("summary", {})
+
+          def count(key, items):
+              return int(summary.get(key, len(items)))
+
+          def text(value):
+              return escape(str(value if value not in (None, "") else "—"), quote=True)
+
+          def link(url, label):
+              if not url:
+                  return text(label)
+              return f'<a href="{escape(str(url), quote=True)}">{text(label)}</a>'
+
+          def pull_request_link(item):
+              return link(item.get("url"), "PR #" + str(item.get("number", "—")))
+
+          def format_utc(value):
+              if not value:
+                  return "—"
+              try:
+                  timestamp = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+                  return timestamp.astimezone(timezone.utc).strftime("%d/%m/%Y %H:%M UTC")
+              except ValueError:
+                  return text(value)
+
+          def report_date(value):
+              months = ("janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre")
+              try:
+                  timestamp = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+                  return f"{timestamp.day} {months[timestamp.month - 1]} {timestamp.year}"
+              except ValueError:
+                  return str(value)[:10]
+
+          def section(title, subtitle, headers, rows):
+              if not rows:
+                  return ""
+              header_html = "".join(f"<th>{text(header)}</th>" for header in headers)
+              return f"""
+              <section class="section">
+                <h2>{text(title)}</h2>
+                <p class="section-subtitle">{text(subtitle)}</p>
+                <div class="table-wrap"><table><thead><tr>{header_html}</tr></thead><tbody>{''.join(rows)}</tbody></table></div>
+              </section>"""
+
+          def stat_card(value, label, colour):
+              return f"""<td class="stat-cell"><div class="stat-card" style="border-top-color:{colour}"><div class="stat-number">{value}</div><div class="stat-label">{text(label)}</div></div></td>"""
+
+          branch_count = count("unmerged_branch_count", branches)
+          pr_count = count("open_pr_count", open_prs)
+          stale_count = count("stale_merged_branch_count", stale_branches)
+          display_date = report_date(report.get("generated_at", ""))
+
+          branch_rows = [
+              f"<tr><td>{text(item.get('repo'))}</td><td><code>{text(item.get('branch'))}</code></td><td>{text(item.get('owner'))}</td><td>{text(item.get('purpose'))}</td></tr>"
+              for item in branches
+          ]
+          pr_rows = [
+              f"<tr><td>{text(item.get('repo'))}</td><td>{pull_request_link(item)}</td><td>{text(item.get('title'))}</td><td>{text(item.get('author'))}</td><td>{format_utc(item.get('created_at'))}</td></tr>"
+              for item in open_prs
+          ]
+          stale_rows = [
+              f"<tr><td>{text(item.get('repo'))}</td><td><code>{text(item.get('head_branch'))}</code></td><td>{pull_request_link(item)}</td><td>{text(item.get('title'))}</td><td>{text(item.get('author'))}</td><td>{format_utc(item.get('merged_at'))}</td></tr>"
+              for item in stale_branches
+          ]
+
+          sections = "".join([
+              section("Branches non fusionnées", "Ces branches ne sont pas entièrement intégrées à la branche par défaut.", ["Dépôt", "Branche", "Auteur", "Objet"], branch_rows),
+              section("Pull requests ouvertes", "Ces PR sont toujours en attente de fusion ou de fermeture.", ["Dépôt", "PR", "Titre", "Auteur", "Créée le"], pr_rows),
+              section("Branches fusionnées à supprimer", "Ces branches proviennent de PR fusionnées et peuvent être nettoyées.", ["Dépôt", "Branche", "PR", "Objet", "Auteur", "Fusionnée le"], stale_rows),
+          ])
+
+          issue_button = ""
           if report.get("issue_url"):
-              body += f"\n\nReport issue: {report['issue_url']}"
+              issue_url = escape(str(report["issue_url"]), quote=True)
+              issue_button = f'<p class="button-row"><a class="button" href="{issue_url}">Ouvrir le rapport GitHub</a></p>'
+
+          html_body = f"""<!doctype html>
+          <html lang="fr">
+            <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
+            <body>
+              <div class="email-shell">
+                <header><div class="brand">GitHub Perso Manager</div><div class="report-type">Rapport quotidien</div></header>
+                <main>
+                  <h1>Éléments à suivre</h1>
+                  <p class="intro">Rapport généré le <strong>{text(display_date)}</strong>. Seuls les nouveaux éléments depuis le dernier état sont inclus.</p>
+                  <table class="stats" role="presentation"><tr>
+                    {stat_card(branch_count, "branches non fusionnées", "#0969da")}
+                    {stat_card(pr_count, "PR ouvertes", "#8250df")}
+                    {stat_card(stale_count, "branches à supprimer", "#bf8700")}
+                  </tr></table>
+                  {sections}
+                  {issue_button}
+                </main>
+                <footer>Les auteurs et objets de branches sont déduits de la PR ouverte ou du dernier commit. Ce message a été généré automatiquement.</footer>
+              </div>
+              <style>
+                body {{ margin:0; padding:24px 12px; background:#f6f8fa; color:#24292f; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; }}
+                .email-shell {{ max-width:760px; margin:0 auto; background:#ffffff; border:1px solid #d0d7de; border-radius:12px; overflow:hidden; }}
+                header {{ background:#24292f; padding:24px 28px; color:#ffffff; }}
+                .brand {{ font-size:20px; font-weight:700; }} .report-type {{ margin-top:4px; color:#c9d1d9; font-size:14px; }}
+                main {{ padding:28px; }} h1 {{ margin:0 0 8px; font-size:24px; }} .intro {{ margin:0 0 24px; color:#57606a; line-height:1.5; }}
+                .stats {{ width:100%; border-spacing:8px; margin:0 -8px 28px; }} .stat-cell {{ width:33.33%; vertical-align:top; }}
+                .stat-card {{ border:1px solid #d0d7de; border-top:4px solid; border-radius:8px; padding:16px; min-height:58px; background:#f6f8fa; }}
+                .stat-number {{ font-size:28px; font-weight:700; line-height:1; }} .stat-label {{ margin-top:8px; color:#57606a; font-size:13px; line-height:1.25; }}
+                .section {{ margin-top:28px; }} h2 {{ margin:0; font-size:18px; }} .section-subtitle {{ margin:6px 0 12px; color:#57606a; font-size:13px; line-height:1.4; }}
+                .table-wrap {{ overflow-x:auto; border:1px solid #d0d7de; border-radius:8px; }} table {{ width:100%; border-collapse:collapse; font-size:13px; }} th {{ padding:10px 12px; text-align:left; background:#f6f8fa; border-bottom:1px solid #d0d7de; white-space:nowrap; }} td {{ padding:10px 12px; border-bottom:1px solid #d8dee4; vertical-align:top; line-height:1.4; }} tbody tr:last-child td {{ border-bottom:0; }}
+                code {{ padding:2px 4px; background:#f6f8fa; border-radius:4px; font-size:12px; overflow-wrap:anywhere; }} a {{ color:#0969da; text-decoration:none; }} .button-row {{ margin:28px 0 0; }} .button {{ display:inline-block; padding:11px 16px; border-radius:6px; background:#0969da; color:#ffffff; font-weight:600; }}
+                footer {{ padding:18px 28px; border-top:1px solid #d0d7de; color:#57606a; background:#f6f8fa; font-size:12px; line-height:1.45; }}
+                @media only screen and (max-width:600px) {{ body {{ padding:0; }} .email-shell {{ border-width:0; border-radius:0; }} main {{ padding:20px 16px; }} header {{ padding:20px 16px; }} .stats, .stats tbody, .stats tr, .stat-cell {{ display:block; width:100%; }} .stat-cell {{ padding:4px 0; }} th, td {{ padding:8px; }} }}
+              </style>
+            </body>
+          </html>"""
+
+          summary_parts = []
+          if branch_count:
+              summary_parts.append(f"{branch_count} branche(s) non fusionnée(s)")
+          if pr_count:
+              summary_parts.append(f"{pr_count} PR ouverte(s)")
+          if stale_count:
+              summary_parts.append(f"{stale_count} branche(s) à supprimer")
+          subject = "[GitHub] Rapport quotidien — " + ", ".join(summary_parts)
+
+          plain_lines = ["GitHub Perso Manager", f"Rapport quotidien du {display_date}", ""]
+          if branches:
+              plain_lines.extend(["BRANCHES NON FUSIONNÉES"] + [f"- {item.get('repo')} / {item.get('branch')} — {item.get('owner')} — {item.get('purpose')}" for item in branches] + [""])
+          if open_prs:
+              plain_lines.extend(["PULL REQUESTS OUVERTES"] + [f"- {item.get('repo')} — PR #{item.get('number')}: {item.get('title')} ({item.get('author')}) — {item.get('url')}" for item in open_prs] + [""])
+          if stale_branches:
+              plain_lines.extend(["BRANCHES FUSIONNÉES À SUPPRIMER"] + [f"- {item.get('repo')} / {item.get('head_branch')} — PR #{item.get('number')}: {item.get('title')}" for item in stale_branches] + [""])
+          if report.get("issue_url"):
+              plain_lines.append(f"Ouvrir le rapport GitHub : {report['issue_url']}")
+          plain_body = "\n".join(plain_lines)
 
           message = EmailMessage()
-          message["Subject"] = f"[GitHub Perso Manager] {report['title']}"
+          message["Subject"] = subject
           message["From"] = f"GitHub Perso Manager <{recipient}>"
           message["To"] = recipient
-          message.set_content(body, charset="utf-8")
+          message.set_content(plain_body, charset="utf-8")
+          message.add_alternative(html_body, subtype="html", charset="utf-8")
 
           try:
               context = ssl.create_default_context()

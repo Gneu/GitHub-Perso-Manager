@@ -1,6 +1,6 @@
 # GitHub Perso Manager
 
-Daily automated monitor for all GitHub repositories accessible to the `Gneu` account. It creates a GitHub issue only when a monitored change occurs.
+Daily monitor for GitHub repositories accessible to the `Gneu` account. It creates a detailed GitHub issue and sends an email only when monitored changes occur.
 
 ## What it detects
 
@@ -10,27 +10,62 @@ Daily automated monitor for all GitHub repositories accessible to the `Gneu` acc
 | New open PR | Repository, PR link, title, author and creation time |
 | Merged PR branch not deleted | Repository, branch, PR link, purpose, author and merge time |
 
-A branch is considered merged only when its latest commit is fully contained in the repository's default branch. A branch that gained commits after a previous merge remains reportable.
+A branch is considered merged only when its latest commit is fully contained in the default branch. A branch with commits after a prior merge remains reportable.
 
 ## Ownership and purpose inference
 
-GitHub does not provide native branch-owner or branch-purpose fields. The report therefore uses this deterministic precedence:
+GitHub has no native branch-owner or branch-purpose fields, so the monitor uses this deterministic precedence:
 
 | Information | When an open PR exists | Otherwise |
 |---|---|---|
 | Owner | Open PR author | Latest commit author |
 | Purpose | Open PR title | `No open PR; inferred from branch name` |
 
-The report identifies the source used for each new branch. These values are practical signals, not formal GitHub ownership metadata.
+These are practical signals, not formal GitHub ownership metadata.
+
+## Delivery behaviour
+
+When changes are found, the workflow:
+
+1. Creates a `daily-report` issue in this repository with the full Markdown report.
+2. Sends the same report as a UTF-8 plain-text email to `fabrice.r@gmail.com`, including the issue link.
+3. Updates the `data` branch baseline only after email delivery succeeds.
+
+If nothing changed, it sends no email and creates no issue.
 
 ## How it works
 
 1. **GitHub Actions** runs daily at 08:00 Paris time (06:00 UTC).
-2. A PowerShell script scans all repositories readable by the `GH_PAT` secret via `gh` CLI.
-3. It records unmerged branches, open PRs and merged-PR branches that still exist.
-4. It compares the current snapshot with the previous snapshot stored on the `data` branch.
-5. If new items exist → a `daily-report` issue is created in this repository.
-6. If nothing changed → no issue, no noise.
+2. The PowerShell monitor scans each repository using `gh` CLI and the `GH_PAT` secret.
+3. It compares branches, PRs and stale merged branches against the state snapshot on the `data` branch.
+4. A report JSON file is generated only if a reportable change exists.
+5. The workflow creates the issue and sends Gmail through SMTP-over-SSL.
+
+## Manual test
+
+In this repository: **Actions** → **Daily GitHub Monitor** → **Run workflow**.
+
+Enable **“Generate a report and email even when nothing changed”** to send a one-off end-to-end test report. This creates a report issue and email, but leaves the normal baseline current.
+
+## Local dry run
+
+A dry run reads GitHub but never creates an issue or sends an email:
+
+```powershell
+$state = Join-Path $env:TEMP "github-perso-manager-state.json"
+./Scripts/Check-GitHubChanges.ps1 `
+  -PreviousStateJson $state `
+  -OutputStateJson $state `
+  -ForceReport `
+  -DryRun
+```
+
+## Required GitHub Actions secrets
+
+| Secret | Purpose |
+|---|---|
+| `GH_PAT` | Fine-grained PAT for `Gneu`, with all-repository access and read access to Contents and Pull requests; Issues: Read and write remains required for issue creation. |
+| `GMAIL_APP_PASSWORD` | Gmail App Password for `fabrice.r@gmail.com`, used only at runtime to send report emails. Never commit or print it. |
 
 ## Structure
 
@@ -41,25 +76,3 @@ Documentation/                  Project docs
 .github/workflows/              GitHub Actions workflow definitions
 .kiro/steering/                 Project-local Kiro steering
 ```
-
-## Manual trigger
-
-In this repository: **Actions** → **Daily GitHub Monitor** → **Run workflow**.
-
-## Local dry run
-
-A dry run reads GitHub but never creates an issue. Use temporary state paths so the project working tree remains untouched:
-
-```powershell
-$state = Join-Path $env:TEMP "github-perso-manager-state.json"
-./Scripts/Check-GitHubChanges.ps1 `
-  -PreviousStateJson $state `
-  -OutputStateJson $state `
-  -DryRun
-```
-
-## Requirements
-
-- GitHub Actions secret `GH_PAT`: fine-grained token for `Gneu`, with all-repository access and read permissions for Contents and Pull requests. The current workflow also uses it to create issues, so it requires Issues: Read and write.
-- `gh` CLI authenticated (`gh auth status`) for local dry runs.
-- PowerShell 7+ for local runs; GitHub Actions runs pwsh on Ubuntu.

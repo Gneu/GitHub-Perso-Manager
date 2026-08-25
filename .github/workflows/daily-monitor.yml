@@ -4,11 +4,17 @@ on:
   schedule:
     # 06:00 UTC = 08:00 Paris (CEST)
     - cron: "0 6 * * *"
-  workflow_dispatch: # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      force_report:
+        description: "Generate a report and email even when nothing changed"
+        required: false
+        default: false
+        type: boolean
 
 permissions:
-  contents: write    # To read/write state on data branch
-  issues: write      # To create issues
+  contents: write    # Read/write state on data branch
+  issues: write      # Create daily report issues
 
 jobs:
   monitor:
@@ -35,24 +41,80 @@ jobs:
       - name: Run monitoring script
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
+          FORCE_REPORT: ${{ inputs.force_report || 'false' }}
         shell: pwsh
         run: |
-          ./Scripts/Check-GitHubChanges.ps1 `
-            -PreviousStateJson "state.json" `
-            -OutputStateJson "state.json" `
-            -RepoName "${{ github.repository }}"
+          Remove-Item "report.json" -ErrorAction SilentlyContinue
+          $parameters = @{
+            PreviousStateJson = "state.json"
+            OutputStateJson = "state.json"
+            RepoName = "${{ github.repository }}"
+            ReportJsonPath = "report.json"
+          }
+          if ($env:FORCE_REPORT -eq "true") {
+            $parameters.ForceReport = $true
+          }
+          ./Scripts/Check-GitHubChanges.ps1 @parameters
+
+      - name: Detect report
+        id: report
+        shell: bash
+        run: |
+          if [ -s report.json ]; then
+            echo "has_report=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_report=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Send report email
+        if: steps.report.outputs.has_report == 'true'
+        env:
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import smtplib
+          import ssl
+          from email.message import EmailMessage
+
+          password = os.environ.get("GMAIL_APP_PASSWORD", "").replace(" ", "")
+          if not password:
+              raise SystemExit("GMAIL_APP_PASSWORD secret is missing.")
+
+          with open("report.json", encoding="utf-8-sig") as report_file:
+              report = json.load(report_file)
+
+          recipient = "fabrice.r@gmail.com"
+          body = report["body"]
+          if report.get("issue_url"):
+              body += f"\n\nReport issue: {report['issue_url']}"
+
+          message = EmailMessage()
+          message["Subject"] = f"[GitHub Perso Manager] {report['title']}"
+          message["From"] = f"GitHub Perso Manager <{recipient}>"
+          message["To"] = recipient
+          message.set_content(body, charset="utf-8")
+
+          try:
+              context = ssl.create_default_context()
+              with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context, timeout=30) as smtp:
+                  smtp.login(recipient, password)
+                  smtp.send_message(message)
+          except smtplib.SMTPAuthenticationError:
+              raise SystemExit("Gmail SMTP authentication failed. Check the App Password secret and Google account settings.")
+          except (smtplib.SMTPException, OSError):
+              raise SystemExit("Gmail SMTP delivery failed. Check Gmail availability and account policy.")
+          PY
 
       - name: Push updated state to data branch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Save state file path before branch switch
           cp state.json /tmp/state.json
-
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Create or switch to data branch
           if git rev-parse --verify origin/data >/dev/null 2>&1; then
             git checkout data
             git pull origin data
@@ -61,7 +123,6 @@ jobs:
             git rm -rf . 2>/dev/null || true
           fi
 
-          # Copy state file and commit
           cp /tmp/state.json state.json
           git add state.json
           git diff --cached --quiet || git commit -m "Update state $(date -u +%Y-%m-%d)"

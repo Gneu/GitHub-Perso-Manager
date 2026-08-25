@@ -38,6 +38,11 @@ param(
 Set-StrictMode -Version 2
 $ErrorActionPreference = "Stop"
 
+# Ensure non-ASCII PR titles survive piping from Windows PowerShell to gh.
+$utf8NoBom = [System.Text.UTF8Encoding]::new($false)
+[Console]::OutputEncoding = $utf8NoBom
+$OutputEncoding = $utf8NoBom
+
 # --- GitHub data retrieval ---
 
 function Get-AllRepos {

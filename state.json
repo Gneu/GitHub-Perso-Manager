@@ -1,105 +1,79 @@
 {
-  "branches": {
-    "Gneu/PokeNinjaGo/codex/art-2d-pipeline": {
-      "repo": "Gneu/PokeNinjaGo",
-      "branch": "codex/art-2d-pipeline"
-    },
-    "Gneu/app-portal/codex/app-portal-steering-sync": {
-      "repo": "Gneu/app-portal",
-      "branch": "codex/app-portal-steering-sync"
-    },
-    "Gneu/PokeNinjaGo/codex/playtest-improvements": {
-      "repo": "Gneu/PokeNinjaGo",
-      "branch": "codex/playtest-improvements"
-    },
-    "Gneu/app-portal/codex/godot-inline-bootstrap": {
-      "repo": "Gneu/app-portal",
-      "branch": "codex/godot-inline-bootstrap"
-    },
-    "Gneu/app-portal/codex/pokeninjago-web-route": {
-      "repo": "Gneu/app-portal",
-      "branch": "codex/pokeninjago-web-route"
-    },
-    "Gneu/JDM-v3/codex/hunt-14-families": {
-      "repo": "Gneu/JDM-v3",
-      "branch": "codex/hunt-14-families"
-    },
-    "Gneu/PokeNinjaGo/codex/web-playtest-export": {
-      "repo": "Gneu/PokeNinjaGo",
-      "branch": "codex/web-playtest-export"
-    },
-    "Gneu/PokeNinjaGo/codex/fix-web-publish-manifest": {
-      "repo": "Gneu/PokeNinjaGo",
-      "branch": "codex/fix-web-publish-manifest"
-    }
-  },
-  "stale_branches": {
-    "Gneu/app-portal/codex/app-portal-steering-sync": {
-      "title": "chore(steering): sync Apps Dev instructions",
-      "head_branch": "codex/app-portal-steering-sync",
-      "repo": "Gneu/app-portal",
-      "merged_at": "2026-08-24T10:51:37Z",
-      "number": 20,
-      "url": "https://github.com/Gneu/app-portal/pull/20"
-    },
-    "Gneu/PokeNinjaGo/codex/playtest-improvements": {
-      "title": "feat: implement validated playtest improvements",
-      "head_branch": "codex/playtest-improvements",
-      "repo": "Gneu/PokeNinjaGo",
-      "merged_at": "2026-08-24T09:53:13Z",
-      "number": 22,
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/22"
-    },
-    "Gneu/app-portal/codex/godot-inline-bootstrap": {
-      "title": "fix(portal): allow Godot inline bootstrap",
-      "head_branch": "codex/godot-inline-bootstrap",
-      "repo": "Gneu/app-portal",
-      "merged_at": "2026-08-24T10:58:12Z",
-      "number": 21,
-      "url": "https://github.com/Gneu/app-portal/pull/21"
-    },
-    "Gneu/app-portal/codex/pokeninjago-web-route": {
-      "title": "feat: publier le playtest Web PokeNinjaGo en privé",
-      "head_branch": "codex/pokeninjago-web-route",
-      "repo": "Gneu/app-portal",
-      "merged_at": "2026-08-24T10:46:30Z",
-      "number": 19,
-      "url": "https://github.com/Gneu/app-portal/pull/19"
-    },
-    "Gneu/JDM-v3/codex/hunt-14-families": {
-      "title": "feat(hunt): expand enemy family system",
-      "head_branch": "codex/hunt-14-families",
-      "repo": "Gneu/JDM-v3",
-      "merged_at": "2026-08-21T18:35:37Z",
-      "number": 8,
-      "url": "https://github.com/Gneu/JDM-v3/pull/8"
-    },
-    "Gneu/PokeNinjaGo/codex/web-playtest-export": {
-      "title": "feat: add private web playtest export",
-      "head_branch": "codex/web-playtest-export",
-      "repo": "Gneu/PokeNinjaGo",
-      "merged_at": "2026-08-24T09:53:11Z",
-      "number": 24,
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/24"
-    },
-    "Gneu/PokeNinjaGo/codex/fix-web-publish-manifest": {
-      "title": "fix: normalize web release paths on PowerShell",
-      "head_branch": "codex/fix-web-publish-manifest",
-      "repo": "Gneu/PokeNinjaGo",
-      "merged_at": "2026-08-24T09:57:48Z",
-      "number": 25,
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/25"
-    }
-  },
+  "branches": {},
   "prs": {
     "Gneu/PokeNinjaGo/#23": {
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/23",
+      "repo": "Gneu/PokeNinjaGo",
+      "head_branch": "codex/art-2d-pipeline",
       "title": "feat: add JRPG visual presentation pipeline",
       "author": "Gneu",
       "created_at": "2026-08-16T20:50:10Z",
+      "number": 23
+    }
+  },
+  "stale_branches": {
+    "Gneu/PokeNinjaGo/codex/fix-web-publish-manifest": {
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/25",
       "repo": "Gneu/PokeNinjaGo",
-      "number": 23,
-      "head_branch": "codex/art-2d-pipeline",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/23"
+      "head_branch": "codex/fix-web-publish-manifest",
+      "title": "fix: normalize web release paths on PowerShell",
+      "author": "Gneu",
+      "merged_at": "2026-08-24T09:57:48Z",
+      "number": 25
+    },
+    "Gneu/app-portal/codex/pokeninjago-web-route": {
+      "url": "https://github.com/Gneu/app-portal/pull/19",
+      "repo": "Gneu/app-portal",
+      "head_branch": "codex/pokeninjago-web-route",
+      "title": "feat: publier le playtest Web PokeNinjaGo en privé",
+      "author": "Gneu",
+      "merged_at": "2026-08-24T10:46:30Z",
+      "number": 19
+    },
+    "Gneu/PokeNinjaGo/codex/playtest-improvements": {
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/22",
+      "repo": "Gneu/PokeNinjaGo",
+      "head_branch": "codex/playtest-improvements",
+      "title": "feat: implement validated playtest improvements",
+      "author": "Gneu",
+      "merged_at": "2026-08-24T09:53:13Z",
+      "number": 22
+    },
+    "Gneu/JDM-v3/codex/hunt-14-families": {
+      "url": "https://github.com/Gneu/JDM-v3/pull/8",
+      "repo": "Gneu/JDM-v3",
+      "head_branch": "codex/hunt-14-families",
+      "title": "feat(hunt): expand enemy family system",
+      "author": "davidoliviersaban",
+      "merged_at": "2026-08-21T18:35:37Z",
+      "number": 8
+    },
+    "Gneu/app-portal/codex/godot-inline-bootstrap": {
+      "url": "https://github.com/Gneu/app-portal/pull/21",
+      "repo": "Gneu/app-portal",
+      "head_branch": "codex/godot-inline-bootstrap",
+      "title": "fix(portal): allow Godot inline bootstrap",
+      "author": "Gneu",
+      "merged_at": "2026-08-24T10:58:12Z",
+      "number": 21
+    },
+    "Gneu/PokeNinjaGo/codex/web-playtest-export": {
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/24",
+      "repo": "Gneu/PokeNinjaGo",
+      "head_branch": "codex/web-playtest-export",
+      "title": "feat: add private web playtest export",
+      "author": "Gneu",
+      "merged_at": "2026-08-24T09:53:11Z",
+      "number": 24
+    },
+    "Gneu/app-portal/codex/app-portal-steering-sync": {
+      "url": "https://github.com/Gneu/app-portal/pull/20",
+      "repo": "Gneu/app-portal",
+      "head_branch": "codex/app-portal-steering-sync",
+      "title": "chore(steering): sync Apps Dev instructions",
+      "author": "Gneu",
+      "merged_at": "2026-08-24T10:51:37Z",
+      "number": 20
     }
   }
 }

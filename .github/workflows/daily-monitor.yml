@@ -103,7 +103,7 @@ jobs:
           def link(url, label):
               if not url:
                   return text(label)
-              return f'<a href="{escape(str(url), quote=True)}">{text(label)}</a>'
+              return f'<a href="{escape(str(url), quote=True)}" style="color:#2563eb;text-decoration:none;font-weight:700;">{text(label)}</a>'
 
           def pull_request_link(item):
               return link(item.get("url"), "PR #" + str(item.get("number", "—")))
@@ -125,19 +125,33 @@ jobs:
               except ValueError:
                   return str(value)[:10]
 
+          def email_cell(content):
+              return f'<td align="center" style="padding:10px 8px;border-bottom:1px solid #e2e8f0;color:#334155;font-size:12px;line-height:18px;text-align:center;vertical-align:middle;word-break:break-word;">{content}</td>'
+
+          def code_label(value):
+              return f'<span style="display:inline-block;background:#eff6ff;border:1px solid #bfdbfe;border-radius:5px;padding:3px 6px;color:#1e3a8a;font-family:Consolas,monospace;font-size:11px;line-height:15px;">{text(value)}</span>'
+
           def section(title, subtitle, headers, rows):
               if not rows:
                   return ""
-              header_html = "".join(f"<th>{text(header)}</th>" for header in headers)
+              header_html = "".join(f'<th align="center" style="padding:10px 8px;background:#eff6ff;border-bottom:1px solid #bfdbfe;color:#1e3a8a;font-size:11px;font-weight:700;letter-spacing:0.3px;text-align:center;text-transform:uppercase;">{text(header)}</th>' for header in headers)
               return f"""
-              <section class="section">
-                <h2>{text(title)}</h2>
-                <p class="section-subtitle">{text(subtitle)}</p>
-                <div class="table-wrap"><table><thead><tr>{header_html}</tr></thead><tbody>{''.join(rows)}</tbody></table></div>
-              </section>"""
+              <tr><td style="padding:12px 28px 0;">
+                <table role="presentation" width="100%" align="center" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #dbeafe;border-radius:10px;background:#ffffff;">
+                  <tr><td align="center" style="padding:18px 18px 12px;background:#f8fbff;border-bottom:1px solid #dbeafe;">
+                    <div style="color:#1e3a8a;font-size:17px;font-weight:700;line-height:22px;text-align:center;">{text(title)}</div>
+                    <div style="margin-top:5px;color:#64748b;font-size:12px;line-height:18px;text-align:center;">{text(subtitle)}</div>
+                  </td></tr>
+                  <tr><td style="padding:0;">
+                    <table role="presentation" width="100%" align="center" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+                      <thead><tr>{header_html}</tr></thead><tbody>{''.join(rows)}</tbody>
+                    </table>
+                  </td></tr>
+                </table>
+              </td></tr>"""
 
           def stat_card(value, label, colour):
-              return f"""<td class="stat-cell"><div class="stat-card" style="border-top-color:{colour}"><div class="stat-number">{value}</div><div class="stat-label">{text(label)}</div></div></td>"""
+              return f"""<td width="33%" align="center" style="padding:4px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e2e8f0;border-top:4px solid {colour};border-radius:10px;background:#f8fafc;"><tr><td align="center" style="padding:14px 8px 12px;text-align:center;"><div style="color:#0f172a;font-size:27px;font-weight:700;line-height:30px;">{value}</div><div style="margin-top:6px;color:#64748b;font-size:11px;font-weight:600;line-height:15px;text-align:center;">{text(label)}</div></td></tr></table></td>"""
 
           branch_count = count("unmerged_branch_count", branches)
           pr_count = count("open_pr_count", open_prs)
@@ -145,15 +159,15 @@ jobs:
           display_date = report_date(report.get("generated_at", ""))
 
           branch_rows = [
-              f"<tr><td>{text(item.get('repo'))}</td><td><code>{text(item.get('branch'))}</code></td><td>{text(item.get('owner'))}</td><td>{text(item.get('purpose'))}</td></tr>"
+              f"<tr>{email_cell(text(item.get('repo')))}{email_cell(code_label(item.get('branch')))}{email_cell(text(item.get('owner')))}{email_cell(text(item.get('purpose')))}</tr>"
               for item in branches
           ]
           pr_rows = [
-              f"<tr><td>{text(item.get('repo'))}</td><td>{pull_request_link(item)}</td><td>{text(item.get('title'))}</td><td>{text(item.get('author'))}</td><td>{format_utc(item.get('created_at'))}</td></tr>"
+              f"<tr>{email_cell(text(item.get('repo')))}{email_cell(pull_request_link(item))}{email_cell(text(item.get('title')))}{email_cell(text(item.get('author')))}{email_cell(format_utc(item.get('created_at')))}</tr>"
               for item in open_prs
           ]
           stale_rows = [
-              f"<tr><td>{text(item.get('repo'))}</td><td><code>{text(item.get('head_branch'))}</code></td><td>{pull_request_link(item)}</td><td>{text(item.get('title'))}</td><td>{text(item.get('author'))}</td><td>{format_utc(item.get('merged_at'))}</td></tr>"
+              f"<tr>{email_cell(text(item.get('repo')))}{email_cell(code_label(item.get('head_branch')))}{email_cell(pull_request_link(item))}{email_cell(text(item.get('title')))}{email_cell(text(item.get('author')))}{email_cell(format_utc(item.get('merged_at')))}</tr>"
               for item in stale_branches
           ]
 
@@ -166,44 +180,31 @@ jobs:
           issue_button = ""
           if report.get("issue_url"):
               issue_url = escape(str(report["issue_url"]), quote=True)
-              issue_button = f'<p class="button-row"><a class="button" href="{issue_url}">Ouvrir le rapport GitHub</a></p>'
+              issue_button = f"""<tr><td align="center" style="padding:26px 28px 14px;"><a href="{issue_url}" style="display:inline-block;background:#2563eb;border-radius:7px;color:#ffffff;font-size:14px;font-weight:700;padding:12px 20px;text-align:center;text-decoration:none;">Ouvrir le rapport GitHub</a></td></tr>"""
+
+          stats_html = f"""<table role="presentation" width="100%" align="center" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate;table-layout:fixed;"><tr>{stat_card(branch_count, "branches non fusionnées", "#2563eb")}{stat_card(pr_count, "PR ouvertes", "#7c3aed")}{stat_card(stale_count, "branches à supprimer", "#d97706")}</tr></table>"""
 
           html_body = f"""<!doctype html>
-          <html lang="fr">
-            <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
-            <body>
-              <div class="email-shell">
-                <header><div class="brand">GitHub Perso Manager</div><div class="report-type">Rapport quotidien</div></header>
-                <main>
-                  <h1>Éléments à suivre</h1>
-                  <p class="intro">Rapport généré le <strong>{text(display_date)}</strong>. Seuls les nouveaux éléments depuis le dernier état sont inclus.</p>
-                  <table class="stats" role="presentation"><tr>
-                    {stat_card(branch_count, "branches non fusionnées", "#0969da")}
-                    {stat_card(pr_count, "PR ouvertes", "#8250df")}
-                    {stat_card(stale_count, "branches à supprimer", "#bf8700")}
-                  </tr></table>
-                  {sections}
-                  {issue_button}
-                </main>
-                <footer>Les auteurs et objets de branches sont déduits de la PR ouverte ou du dernier commit. Ce message a été généré automatiquement.</footer>
-              </div>
-              <style>
-                body {{ margin:0; padding:24px 12px; background:#f6f8fa; color:#24292f; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; }}
-                .email-shell {{ max-width:760px; margin:0 auto; background:#ffffff; border:1px solid #d0d7de; border-radius:12px; overflow:hidden; }}
-                header {{ background:#24292f; padding:24px 28px; color:#ffffff; }}
-                .brand {{ font-size:20px; font-weight:700; }} .report-type {{ margin-top:4px; color:#c9d1d9; font-size:14px; }}
-                main {{ padding:28px; }} h1 {{ margin:0 0 8px; font-size:24px; }} .intro {{ margin:0 0 24px; color:#57606a; line-height:1.5; }}
-                .stats {{ width:100%; border-spacing:8px; margin:0 -8px 28px; }} .stat-cell {{ width:33.33%; vertical-align:top; }}
-                .stat-card {{ border:1px solid #d0d7de; border-top:4px solid; border-radius:8px; padding:16px; min-height:58px; background:#f6f8fa; }}
-                .stat-number {{ font-size:28px; font-weight:700; line-height:1; }} .stat-label {{ margin-top:8px; color:#57606a; font-size:13px; line-height:1.25; }}
-                .section {{ margin-top:28px; }} h2 {{ margin:0; font-size:18px; }} .section-subtitle {{ margin:6px 0 12px; color:#57606a; font-size:13px; line-height:1.4; }}
-                .table-wrap {{ overflow-x:auto; border:1px solid #d0d7de; border-radius:8px; }} table {{ width:100%; border-collapse:collapse; font-size:13px; }} th {{ padding:10px 12px; text-align:left; background:#f6f8fa; border-bottom:1px solid #d0d7de; white-space:nowrap; }} td {{ padding:10px 12px; border-bottom:1px solid #d8dee4; vertical-align:top; line-height:1.4; }} tbody tr:last-child td {{ border-bottom:0; }}
-                code {{ padding:2px 4px; background:#f6f8fa; border-radius:4px; font-size:12px; overflow-wrap:anywhere; }} a {{ color:#0969da; text-decoration:none; }} .button-row {{ margin:28px 0 0; }} .button {{ display:inline-block; padding:11px 16px; border-radius:6px; background:#0969da; color:#ffffff; font-weight:600; }}
-                footer {{ padding:18px 28px; border-top:1px solid #d0d7de; color:#57606a; background:#f6f8fa; font-size:12px; line-height:1.45; }}
-                @media only screen and (max-width:600px) {{ body {{ padding:0; }} .email-shell {{ border-width:0; border-radius:0; }} main {{ padding:20px 16px; }} header {{ padding:20px 16px; }} .stats, .stats tbody, .stats tr, .stat-cell {{ display:block; width:100%; }} .stat-cell {{ padding:4px 0; }} th, td {{ padding:8px; }} }}
-              </style>
-            </body>
-          </html>"""
+          <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
+          <body style="margin:0;padding:0;background:#f1f5f9;color:#0f172a;font-family:Arial,Helvetica,sans-serif;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;background:#f1f5f9;"><tr><td align="center" style="padding:24px 12px;">
+              <table role="presentation" width="680" align="center" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:680px;background:#ffffff;border:1px solid #dbe4f0;border-radius:14px;">
+                <tr><td align="center" style="padding:30px 28px;background:#0f172a;color:#ffffff;text-align:center;">
+                  <div style="color:#93c5fd;font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;">GitHub Perso Manager</div>
+                  <div style="margin-top:9px;font-size:26px;font-weight:700;line-height:32px;">Rapport quotidien</div>
+                  <div style="margin-top:8px;color:#cbd5e1;font-size:13px;line-height:19px;">Nouveaux éléments détectés le {text(display_date)}</div>
+                </td></tr>
+                <tr><td align="center" style="padding:26px 28px 16px;text-align:center;">
+                  <div style="color:#0f172a;font-size:20px;font-weight:700;line-height:26px;">Éléments à suivre</div>
+                  <div style="margin:8px auto 20px;color:#64748b;font-size:13px;line-height:19px;max-width:500px;">Seuls les nouveaux éléments depuis le dernier état sont inclus dans ce rapport.</div>
+                  {stats_html}
+                </td></tr>
+                {sections}
+                {issue_button}
+                <tr><td align="center" style="padding:18px 28px;background:#f8fafc;border-top:1px solid #e2e8f0;color:#64748b;font-size:11px;line-height:16px;text-align:center;">Les auteurs et objets de branches sont déduits de la PR ouverte ou du dernier commit.<br>Message généré automatiquement par GitHub Perso Manager.</td></tr>
+              </table>
+            </td></tr></table>
+          </body></html>"""
 
           summary_parts = []
           if branch_count:

@@ -1,87 +1,110 @@
 {
-  "prs": {
-    "Gneu/PokeNinjaGo/#23": {
-      "head_branch": "codex/art-2d-pipeline",
-      "author": "Gneu",
-      "title": "feat: add JRPG visual presentation pipeline",
-      "number": 23,
-      "repo": "Gneu/PokeNinjaGo",
-      "created_at": "2026-08-16T20:50:10Z",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/23"
-    }
-  },
   "stale_branches": {
-    "Gneu/PokeNinjaGo/codex/fix-web-publish-manifest": {
-      "head_branch": "codex/fix-web-publish-manifest",
-      "author": "Gneu",
-      "merged_at": "2026-08-24T09:57:48Z",
-      "title": "fix: normalize web release paths on PowerShell",
-      "number": 25,
-      "repo": "Gneu/PokeNinjaGo",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/25"
-    },
-    "Gneu/app-portal/codex/app-portal-steering-sync": {
-      "head_branch": "codex/app-portal-steering-sync",
-      "author": "Gneu",
-      "merged_at": "2026-08-24T10:51:37Z",
-      "title": "chore(steering): sync Apps Dev instructions",
-      "number": 20,
-      "repo": "Gneu/app-portal",
-      "url": "https://github.com/Gneu/app-portal/pull/20"
-    },
-    "Gneu/app-portal/codex/godot-inline-bootstrap": {
-      "head_branch": "codex/godot-inline-bootstrap",
-      "author": "Gneu",
-      "merged_at": "2026-08-24T10:58:12Z",
-      "title": "fix(portal): allow Godot inline bootstrap",
-      "number": 21,
-      "repo": "Gneu/app-portal",
-      "url": "https://github.com/Gneu/app-portal/pull/21"
-    },
-    "Gneu/PokeNinjaGo/codex/web-playtest-export": {
-      "head_branch": "codex/web-playtest-export",
-      "author": "Gneu",
-      "merged_at": "2026-08-24T09:53:11Z",
-      "title": "feat: add private web playtest export",
-      "number": 24,
-      "repo": "Gneu/PokeNinjaGo",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/24"
-    },
-    "Gneu/PokeNinjaGo/codex/playtest-improvements": {
-      "head_branch": "codex/playtest-improvements",
-      "author": "Gneu",
-      "merged_at": "2026-08-24T09:53:13Z",
-      "title": "feat: implement validated playtest improvements",
-      "number": 22,
-      "repo": "Gneu/PokeNinjaGo",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/22"
-    },
-    "Gneu/JDM-v3/codex/hunt-14-families": {
-      "head_branch": "codex/hunt-14-families",
-      "author": "davidoliviersaban",
-      "merged_at": "2026-08-21T18:35:37Z",
-      "title": "feat(hunt): expand enemy family system",
-      "number": 8,
-      "repo": "Gneu/JDM-v3",
-      "url": "https://github.com/Gneu/JDM-v3/pull/8"
-    },
     "Gneu/app-portal/codex/pokeninjago-web-route": {
-      "head_branch": "codex/pokeninjago-web-route",
-      "author": "Gneu",
       "merged_at": "2026-08-24T10:46:30Z",
       "title": "feat: publier le playtest Web PokeNinjaGo en privé",
+      "url": "https://github.com/Gneu/app-portal/pull/19",
       "number": 19,
       "repo": "Gneu/app-portal",
-      "url": "https://github.com/Gneu/app-portal/pull/19"
+      "head_branch": "codex/pokeninjago-web-route",
+      "author": "Gneu"
+    },
+    "Gneu/app-portal/codex/godot-inline-bootstrap": {
+      "merged_at": "2026-08-24T10:58:12Z",
+      "title": "fix(portal): allow Godot inline bootstrap",
+      "url": "https://github.com/Gneu/app-portal/pull/21",
+      "number": 21,
+      "repo": "Gneu/app-portal",
+      "head_branch": "codex/godot-inline-bootstrap",
+      "author": "Gneu"
+    },
+    "Gneu/app-portal/codex/app-portal-steering-sync": {
+      "merged_at": "2026-08-24T10:51:37Z",
+      "title": "chore(steering): sync Apps Dev instructions",
+      "url": "https://github.com/Gneu/app-portal/pull/20",
+      "number": 20,
+      "repo": "Gneu/app-portal",
+      "head_branch": "codex/app-portal-steering-sync",
+      "author": "Gneu"
+    },
+    "Gneu/PokeNinjaGo/codex/fix-web-publish-manifest": {
+      "merged_at": "2026-08-24T09:57:48Z",
+      "title": "fix: normalize web release paths on PowerShell",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/25",
+      "number": 25,
+      "repo": "Gneu/PokeNinjaGo",
+      "head_branch": "codex/fix-web-publish-manifest",
+      "author": "Gneu"
+    },
+    "Gneu/PokeNinjaGo/codex/playtest-improvements": {
+      "merged_at": "2026-08-24T09:53:13Z",
+      "title": "feat: implement validated playtest improvements",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/22",
+      "number": 22,
+      "repo": "Gneu/PokeNinjaGo",
+      "head_branch": "codex/playtest-improvements",
+      "author": "Gneu"
+    },
+    "Gneu/JDM-v3/codex/hunt-14-families": {
+      "merged_at": "2026-08-21T18:35:37Z",
+      "title": "feat(hunt): expand enemy family system",
+      "url": "https://github.com/Gneu/JDM-v3/pull/8",
+      "number": 8,
+      "repo": "Gneu/JDM-v3",
+      "head_branch": "codex/hunt-14-families",
+      "author": "davidoliviersaban"
+    },
+    "Gneu/PokeNinjaGo/codex/web-playtest-export": {
+      "merged_at": "2026-08-24T09:53:11Z",
+      "title": "feat: add private web playtest export",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/24",
+      "number": 24,
+      "repo": "Gneu/PokeNinjaGo",
+      "head_branch": "codex/web-playtest-export",
+      "author": "Gneu"
     }
   },
   "branches": {
-    "Gneu/PokemonChessOnline/codex/add-board-animations": {
-      "branch": "codex/add-board-animations",
-      "purpose_source": "Latest commit author",
+    "Gneu/PokemonChessOnline/codex/home-menu-ia-online": {
+      "purpose": "feat: add game menu and local AI setup",
+      "branch": "codex/home-menu-ia-online",
+      "repo": "Gneu/PokemonChessOnline",
       "owner": "Gneu",
+      "purpose_source": "Open PR #24"
+    },
+    "Gneu/PokemonChessOnline/codex/add-board-animations": {
       "purpose": "No open PR; inferred from branch name",
-      "repo": "Gneu/PokemonChessOnline"
+      "branch": "codex/add-board-animations",
+      "repo": "Gneu/PokemonChessOnline",
+      "owner": "Gneu",
+      "purpose_source": "Latest commit author"
+    },
+    "Gneu/PokemonChessOnline/codex/qa-hardening": {
+      "purpose": "No open PR; inferred from branch name",
+      "branch": "codex/qa-hardening",
+      "repo": "Gneu/PokemonChessOnline",
+      "owner": "Gneu",
+      "purpose_source": "Latest commit author"
+    }
+  },
+  "prs": {
+    "Gneu/PokeNinjaGo/#23": {
+      "created_at": "2026-08-16T20:50:10Z",
+      "title": "feat: add JRPG visual presentation pipeline",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/23",
+      "number": 23,
+      "repo": "Gneu/PokeNinjaGo",
+      "head_branch": "codex/art-2d-pipeline",
+      "author": "Gneu"
+    },
+    "Gneu/PokemonChessOnline/#24": {
+      "created_at": "2026-08-27T21:31:02Z",
+      "title": "feat: add game menu and local AI setup",
+      "url": "https://github.com/Gneu/PokemonChessOnline/pull/24",
+      "number": 24,
+      "repo": "Gneu/PokemonChessOnline",
+      "head_branch": "codex/home-menu-ia-online",
+      "author": "Gneu"
     }
   }
 }

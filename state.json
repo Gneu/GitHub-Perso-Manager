@@ -1,110 +1,117 @@
 {
-  "branches": {
-    "Gneu/PokemonChessOnline/codex/nas-groq-runtime-secret": {
-      "repo": "Gneu/PokemonChessOnline",
-      "purpose_source": "Latest commit author",
-      "owner": "Gneu",
-      "purpose": "No open PR; inferred from branch name",
-      "branch": "codex/nas-groq-runtime-secret"
-    },
-    "Gneu/PokemonChessOnline/codex/add-board-animations": {
-      "repo": "Gneu/PokemonChessOnline",
-      "purpose_source": "Latest commit author",
-      "owner": "Gneu",
-      "purpose": "No open PR; inferred from branch name",
-      "branch": "codex/add-board-animations"
-    },
-    "Gneu/PokemonChessOnline/codex/qa-hardening": {
-      "repo": "Gneu/PokemonChessOnline",
-      "purpose_source": "Latest commit author",
-      "owner": "Gneu",
-      "purpose": "No open PR; inferred from branch name",
-      "branch": "codex/qa-hardening"
-    }
-  },
   "stale_branches": {
-    "Gneu/PokeNinjaGo/codex/web-playtest-export": {
-      "author": "Gneu",
-      "repo": "Gneu/PokeNinjaGo",
-      "head_branch": "codex/web-playtest-export",
-      "number": 24,
-      "merged_at": "2026-08-24T09:53:11Z",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/24",
-      "title": "feat: add private web playtest export"
-    },
     "Gneu/PokeNinjaGo/codex/fix-web-publish-manifest": {
-      "author": "Gneu",
-      "repo": "Gneu/PokeNinjaGo",
-      "head_branch": "codex/fix-web-publish-manifest",
       "number": 25,
       "merged_at": "2026-08-24T09:57:48Z",
+      "repo": "Gneu/PokeNinjaGo",
+      "title": "fix: normalize web release paths on PowerShell",
       "url": "https://github.com/Gneu/PokeNinjaGo/pull/25",
-      "title": "fix: normalize web release paths on PowerShell"
+      "head_branch": "codex/fix-web-publish-manifest",
+      "author": "Gneu"
     },
     "Gneu/PokeNinjaGo/codex/playtest-improvements": {
-      "author": "Gneu",
-      "repo": "Gneu/PokeNinjaGo",
-      "head_branch": "codex/playtest-improvements",
       "number": 22,
       "merged_at": "2026-08-24T09:53:13Z",
+      "repo": "Gneu/PokeNinjaGo",
+      "title": "feat: implement validated playtest improvements",
       "url": "https://github.com/Gneu/PokeNinjaGo/pull/22",
-      "title": "feat: implement validated playtest improvements"
+      "head_branch": "codex/playtest-improvements",
+      "author": "Gneu"
     },
-    "Gneu/PokemonChessOnline/codex/nas-groq-runtime-secret": {
-      "author": "Gneu",
-      "repo": "Gneu/PokemonChessOnline",
-      "head_branch": "codex/nas-groq-runtime-secret",
-      "number": 26,
-      "merged_at": "2026-08-28T20:22:39Z",
-      "url": "https://github.com/Gneu/PokemonChessOnline/pull/26",
-      "title": "feat: load Groq secret from NAS runtime"
-    },
-    "Gneu/app-portal/codex/app-portal-steering-sync": {
-      "author": "Gneu",
-      "repo": "Gneu/app-portal",
-      "head_branch": "codex/app-portal-steering-sync",
-      "number": 20,
-      "merged_at": "2026-08-24T10:51:37Z",
-      "url": "https://github.com/Gneu/app-portal/pull/20",
-      "title": "chore(steering): sync Apps Dev instructions"
-    },
-    "Gneu/app-portal/codex/pokeninjago-web-route": {
-      "author": "Gneu",
-      "repo": "Gneu/app-portal",
-      "head_branch": "codex/pokeninjago-web-route",
-      "number": 19,
-      "merged_at": "2026-08-24T10:46:30Z",
-      "url": "https://github.com/Gneu/app-portal/pull/19",
-      "title": "feat: publier le playtest Web PokeNinjaGo en privé"
-    },
-    "Gneu/JDM-v3/codex/hunt-14-families": {
-      "author": "davidoliviersaban",
-      "repo": "Gneu/JDM-v3",
-      "head_branch": "codex/hunt-14-families",
-      "number": 8,
-      "merged_at": "2026-08-21T18:35:37Z",
-      "url": "https://github.com/Gneu/JDM-v3/pull/8",
-      "title": "feat(hunt): expand enemy family system"
+    "Gneu/PokeNinjaGo/codex/web-playtest-export": {
+      "number": 24,
+      "merged_at": "2026-08-24T09:53:11Z",
+      "repo": "Gneu/PokeNinjaGo",
+      "title": "feat: add private web playtest export",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/24",
+      "head_branch": "codex/web-playtest-export",
+      "author": "Gneu"
     },
     "Gneu/app-portal/codex/godot-inline-bootstrap": {
-      "author": "Gneu",
-      "repo": "Gneu/app-portal",
-      "head_branch": "codex/godot-inline-bootstrap",
       "number": 21,
       "merged_at": "2026-08-24T10:58:12Z",
+      "repo": "Gneu/app-portal",
+      "title": "fix(portal): allow Godot inline bootstrap",
       "url": "https://github.com/Gneu/app-portal/pull/21",
-      "title": "fix(portal): allow Godot inline bootstrap"
+      "head_branch": "codex/godot-inline-bootstrap",
+      "author": "Gneu"
+    },
+    "Gneu/PokemonChessOnline/codex/nas-groq-runtime-secret": {
+      "number": 26,
+      "merged_at": "2026-08-28T20:22:39Z",
+      "repo": "Gneu/PokemonChessOnline",
+      "title": "feat: load Groq secret from NAS runtime",
+      "url": "https://github.com/Gneu/PokemonChessOnline/pull/26",
+      "head_branch": "codex/nas-groq-runtime-secret",
+      "author": "Gneu"
+    },
+    "Gneu/JDM-v3/codex/hunt-14-families": {
+      "number": 8,
+      "merged_at": "2026-08-21T18:35:37Z",
+      "repo": "Gneu/JDM-v3",
+      "title": "feat(hunt): expand enemy family system",
+      "url": "https://github.com/Gneu/JDM-v3/pull/8",
+      "head_branch": "codex/hunt-14-families",
+      "author": "davidoliviersaban"
+    },
+    "Gneu/app-portal/codex/app-portal-steering-sync": {
+      "number": 20,
+      "merged_at": "2026-08-24T10:51:37Z",
+      "repo": "Gneu/app-portal",
+      "title": "chore(steering): sync Apps Dev instructions",
+      "url": "https://github.com/Gneu/app-portal/pull/20",
+      "head_branch": "codex/app-portal-steering-sync",
+      "author": "Gneu"
+    },
+    "Gneu/app-portal/codex/pokeninjago-web-route": {
+      "number": 19,
+      "merged_at": "2026-08-24T10:46:30Z",
+      "repo": "Gneu/app-portal",
+      "title": "feat: publier le playtest Web PokeNinjaGo en privé",
+      "url": "https://github.com/Gneu/app-portal/pull/19",
+      "head_branch": "codex/pokeninjago-web-route",
+      "author": "Gneu"
+    }
+  },
+  "branches": {
+    "Gneu/PokemonChessOnline/codex/classic-black-red-bases": {
+      "purpose": "No open PR; inferred from branch name",
+      "purpose_source": "Latest commit author",
+      "owner": "Gneu",
+      "repo": "Gneu/PokemonChessOnline",
+      "branch": "codex/classic-black-red-bases"
+    },
+    "Gneu/PokemonChessOnline/codex/qa-hardening": {
+      "purpose": "No open PR; inferred from branch name",
+      "purpose_source": "Latest commit author",
+      "owner": "Gneu",
+      "repo": "Gneu/PokemonChessOnline",
+      "branch": "codex/qa-hardening"
+    },
+    "Gneu/PokemonChessOnline/codex/add-board-animations": {
+      "purpose": "No open PR; inferred from branch name",
+      "purpose_source": "Latest commit author",
+      "owner": "Gneu",
+      "repo": "Gneu/PokemonChessOnline",
+      "branch": "codex/add-board-animations"
+    },
+    "Gneu/PokemonChessOnline/codex/nas-groq-runtime-secret": {
+      "purpose": "No open PR; inferred from branch name",
+      "purpose_source": "Latest commit author",
+      "owner": "Gneu",
+      "repo": "Gneu/PokemonChessOnline",
+      "branch": "codex/nas-groq-runtime-secret"
     }
   },
   "prs": {
     "Gneu/PokeNinjaGo/#23": {
-      "author": "Gneu",
-      "repo": "Gneu/PokeNinjaGo",
-      "created_at": "2026-08-16T20:50:10Z",
-      "head_branch": "codex/art-2d-pipeline",
       "number": 23,
       "url": "https://github.com/Gneu/PokeNinjaGo/pull/23",
-      "title": "feat: add JRPG visual presentation pipeline"
+      "repo": "Gneu/PokeNinjaGo",
+      "created_at": "2026-08-16T20:50:10Z",
+      "title": "feat: add JRPG visual presentation pipeline",
+      "head_branch": "codex/art-2d-pipeline",
+      "author": "Gneu"
     }
   }
 }

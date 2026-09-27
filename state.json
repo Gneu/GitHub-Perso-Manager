@@ -1,109 +1,109 @@
 {
+  "prs": {},
   "branches": {
-    "Gneu/PokeNinjaGo/codex/playtest-improvements": {
-      "purpose": "No open PR; inferred from branch name",
-      "repo": "Gneu/PokeNinjaGo",
-      "branch": "codex/playtest-improvements",
-      "owner": "Gneu",
-      "purpose_source": "Latest commit author"
-    },
     "Gneu/PokeNinjaGo/codex/fix-windows-export": {
-      "purpose": "No open PR; inferred from branch name",
-      "repo": "Gneu/PokeNinjaGo",
       "branch": "codex/fix-windows-export",
+      "purpose_source": "Latest commit author",
       "owner": "Gneu",
-      "purpose_source": "Latest commit author"
+      "repo": "Gneu/PokeNinjaGo",
+      "purpose": "No open PR; inferred from branch name"
+    },
+    "Gneu/PokeNinjaGo/codex/playtest-improvements": {
+      "branch": "codex/playtest-improvements",
+      "purpose_source": "Latest commit author",
+      "owner": "Gneu",
+      "repo": "Gneu/PokeNinjaGo",
+      "purpose": "No open PR; inferred from branch name"
     },
     "Gneu/app-portal/codex/per-app-visibility": {
-      "purpose": "No open PR; inferred from branch name",
-      "repo": "Gneu/app-portal",
       "branch": "codex/per-app-visibility",
+      "purpose_source": "Latest commit author",
       "owner": "Gneu",
-      "purpose_source": "Latest commit author"
+      "repo": "Gneu/app-portal",
+      "purpose": "No open PR; inferred from branch name"
     }
   },
-  "prs": {},
   "stale_branches": {
     "Gneu/PokeNinjaGo/codex/art-2d-pipeline": {
-      "repo": "Gneu/PokeNinjaGo",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/23",
-      "author": "Gneu",
+      "number": 23,
       "title": "feat: add JRPG visual presentation pipeline",
       "head_branch": "codex/art-2d-pipeline",
       "merged_at": "2026-08-31T21:04:18Z",
-      "number": 23
-    },
-    "Gneu/app-portal/codex/godot-inline-bootstrap": {
-      "repo": "Gneu/app-portal",
-      "url": "https://github.com/Gneu/app-portal/pull/21",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/23",
       "author": "Gneu",
-      "title": "fix(portal): allow Godot inline bootstrap",
-      "head_branch": "codex/godot-inline-bootstrap",
-      "merged_at": "2026-08-24T10:58:12Z",
-      "number": 21
-    },
-    "Gneu/app-portal/codex/app-portal-steering-sync": {
-      "repo": "Gneu/app-portal",
-      "url": "https://github.com/Gneu/app-portal/pull/20",
-      "author": "Gneu",
-      "title": "chore(steering): sync Apps Dev instructions",
-      "head_branch": "codex/app-portal-steering-sync",
-      "merged_at": "2026-08-24T10:51:37Z",
-      "number": 20
-    },
-    "Gneu/PokemonChessOnline/codex/fix-groq-runtime": {
-      "repo": "Gneu/PokemonChessOnline",
-      "url": "https://github.com/Gneu/PokemonChessOnline/pull/37",
-      "author": "Gneu",
-      "title": "fix: make Groq game analysis resilient",
-      "head_branch": "codex/fix-groq-runtime",
-      "merged_at": "2026-08-30T20:45:34Z",
-      "number": 37
-    },
-    "Gneu/PokeNinjaGo/codex/playtest-improvements": {
-      "repo": "Gneu/PokeNinjaGo",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/22",
-      "author": "Gneu",
-      "title": "feat: implement validated playtest improvements",
-      "head_branch": "codex/playtest-improvements",
-      "merged_at": "2026-08-24T09:53:13Z",
-      "number": 22
-    },
-    "Gneu/app-portal/codex/pokeninjago-web-route": {
-      "repo": "Gneu/app-portal",
-      "url": "https://github.com/Gneu/app-portal/pull/19",
-      "author": "Gneu",
-      "title": "feat: publier le playtest Web PokeNinjaGo en privé",
-      "head_branch": "codex/pokeninjago-web-route",
-      "merged_at": "2026-08-24T10:46:30Z",
-      "number": 19
+      "repo": "Gneu/PokeNinjaGo"
     },
     "Gneu/app-portal/codex/per-app-visibility": {
-      "repo": "Gneu/app-portal",
-      "url": "https://github.com/Gneu/app-portal/pull/33",
-      "author": "Gneu",
+      "number": 33,
       "title": "Add per-app portal visibility administration",
       "head_branch": "codex/per-app-visibility",
       "merged_at": "2026-08-30T20:55:43Z",
-      "number": 33
-    },
-    "Gneu/PokeNinjaGo/codex/fix-windows-export": {
-      "repo": "Gneu/PokeNinjaGo",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/27",
+      "url": "https://github.com/Gneu/app-portal/pull/33",
       "author": "Gneu",
-      "title": "fix: keep Windows export dependencies",
-      "head_branch": "codex/fix-windows-export",
-      "merged_at": "2026-08-31T21:17:31Z",
-      "number": 27
+      "repo": "Gneu/app-portal"
     },
     "Gneu/JDM-v3/codex/hunt-14-families": {
-      "repo": "Gneu/JDM-v3",
-      "url": "https://github.com/Gneu/JDM-v3/pull/8",
-      "author": "davidoliviersaban",
+      "number": 8,
       "title": "feat(hunt): expand enemy family system",
       "head_branch": "codex/hunt-14-families",
       "merged_at": "2026-08-21T18:35:37Z",
-      "number": 8
+      "url": "https://github.com/Gneu/JDM-v3/pull/8",
+      "author": "davidoliviersaban",
+      "repo": "Gneu/JDM-v3"
+    },
+    "Gneu/app-portal/codex/pokeninjago-web-route": {
+      "number": 19,
+      "title": "feat: publier le playtest Web PokeNinjaGo en privé",
+      "head_branch": "codex/pokeninjago-web-route",
+      "merged_at": "2026-08-24T10:46:30Z",
+      "url": "https://github.com/Gneu/app-portal/pull/19",
+      "author": "Gneu",
+      "repo": "Gneu/app-portal"
+    },
+    "Gneu/app-portal/codex/app-portal-steering-sync": {
+      "number": 20,
+      "title": "chore(steering): sync Apps Dev instructions",
+      "head_branch": "codex/app-portal-steering-sync",
+      "merged_at": "2026-08-24T10:51:37Z",
+      "url": "https://github.com/Gneu/app-portal/pull/20",
+      "author": "Gneu",
+      "repo": "Gneu/app-portal"
+    },
+    "Gneu/app-portal/codex/godot-inline-bootstrap": {
+      "number": 21,
+      "title": "fix(portal): allow Godot inline bootstrap",
+      "head_branch": "codex/godot-inline-bootstrap",
+      "merged_at": "2026-08-24T10:58:12Z",
+      "url": "https://github.com/Gneu/app-portal/pull/21",
+      "author": "Gneu",
+      "repo": "Gneu/app-portal"
+    },
+    "Gneu/PokeNinjaGo/codex/playtest-improvements": {
+      "number": 22,
+      "title": "feat: implement validated playtest improvements",
+      "head_branch": "codex/playtest-improvements",
+      "merged_at": "2026-08-24T09:53:13Z",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/22",
+      "author": "Gneu",
+      "repo": "Gneu/PokeNinjaGo"
+    },
+    "Gneu/PokemonChessOnline/codex/fix-groq-runtime": {
+      "number": 37,
+      "title": "fix: make Groq game analysis resilient",
+      "head_branch": "codex/fix-groq-runtime",
+      "merged_at": "2026-08-30T20:45:34Z",
+      "url": "https://github.com/Gneu/PokemonChessOnline/pull/37",
+      "author": "Gneu",
+      "repo": "Gneu/PokemonChessOnline"
+    },
+    "Gneu/PokeNinjaGo/codex/fix-windows-export": {
+      "number": 27,
+      "title": "fix: keep Windows export dependencies",
+      "head_branch": "codex/fix-windows-export",
+      "merged_at": "2026-08-31T21:17:31Z",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/27",
+      "author": "Gneu",
+      "repo": "Gneu/PokeNinjaGo"
     }
   }
 }

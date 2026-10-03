@@ -1,109 +1,142 @@
 {
-  "stale_branches": {
+  "branches": {
+    "Gneu/PokeNinjaGo/codex/pokemon-evolution-progression": {
+      "branch": "codex/pokemon-evolution-progression",
+      "purpose": "docs: define Pokémon evolution progression",
+      "repo": "Gneu/PokeNinjaGo",
+      "owner": "Gneu",
+      "purpose_source": "Open PR #38"
+    },
     "Gneu/PokeNinjaGo/codex/playtest-improvements": {
-      "number": 22,
-      "title": "feat: implement validated playtest improvements",
-      "head_branch": "codex/playtest-improvements",
+      "branch": "codex/playtest-improvements",
+      "purpose": "No open PR; inferred from branch name",
       "repo": "Gneu/PokeNinjaGo",
-      "merged_at": "2026-08-24T09:53:13Z",
-      "author": "Gneu",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/22"
-    },
-    "Gneu/app-portal/codex/app-portal-steering-sync": {
-      "number": 20,
-      "title": "chore(steering): sync Apps Dev instructions",
-      "head_branch": "codex/app-portal-steering-sync",
-      "repo": "Gneu/app-portal",
-      "merged_at": "2026-08-24T10:51:37Z",
-      "author": "Gneu",
-      "url": "https://github.com/Gneu/app-portal/pull/20"
-    },
-    "Gneu/PokeNinjaGo/codex/art-2d-pipeline": {
-      "number": 23,
-      "title": "feat: add JRPG visual presentation pipeline",
-      "head_branch": "codex/art-2d-pipeline",
-      "repo": "Gneu/PokeNinjaGo",
-      "merged_at": "2026-08-31T21:04:18Z",
-      "author": "Gneu",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/23"
+      "owner": "Gneu",
+      "purpose_source": "Latest commit author"
     },
     "Gneu/app-portal/codex/per-app-visibility": {
-      "number": 33,
-      "title": "Add per-app portal visibility administration",
-      "head_branch": "codex/per-app-visibility",
+      "branch": "codex/per-app-visibility",
+      "purpose": "No open PR; inferred from branch name",
       "repo": "Gneu/app-portal",
-      "merged_at": "2026-08-30T20:55:43Z",
-      "author": "Gneu",
-      "url": "https://github.com/Gneu/app-portal/pull/33"
+      "owner": "Gneu",
+      "purpose_source": "Latest commit author"
     },
-    "Gneu/app-portal/codex/pokeninjago-web-route": {
-      "number": 19,
-      "title": "feat: publier le playtest Web PokeNinjaGo en privé",
-      "head_branch": "codex/pokeninjago-web-route",
-      "repo": "Gneu/app-portal",
-      "merged_at": "2026-08-24T10:46:30Z",
-      "author": "Gneu",
-      "url": "https://github.com/Gneu/app-portal/pull/19"
-    },
-    "Gneu/app-portal/codex/godot-inline-bootstrap": {
-      "number": 21,
-      "title": "fix(portal): allow Godot inline bootstrap",
-      "head_branch": "codex/godot-inline-bootstrap",
-      "repo": "Gneu/app-portal",
-      "merged_at": "2026-08-24T10:58:12Z",
-      "author": "Gneu",
-      "url": "https://github.com/Gneu/app-portal/pull/21"
-    },
-    "Gneu/JDM-v3/codex/hunt-14-families": {
-      "number": 8,
-      "title": "feat(hunt): expand enemy family system",
-      "head_branch": "codex/hunt-14-families",
-      "repo": "Gneu/JDM-v3",
-      "merged_at": "2026-08-21T18:35:37Z",
-      "author": "davidoliviersaban",
-      "url": "https://github.com/Gneu/JDM-v3/pull/8"
-    },
-    "Gneu/PokemonChessOnline/codex/fix-groq-runtime": {
-      "number": 37,
-      "title": "fix: make Groq game analysis resilient",
-      "head_branch": "codex/fix-groq-runtime",
-      "repo": "Gneu/PokemonChessOnline",
-      "merged_at": "2026-08-30T20:45:34Z",
-      "author": "Gneu",
-      "url": "https://github.com/Gneu/PokemonChessOnline/pull/37"
+    "Gneu/PokeNinjaGo/codex/pokemon-comfyui-sprites": {
+      "branch": "codex/pokemon-comfyui-sprites",
+      "purpose": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
+      "repo": "Gneu/PokeNinjaGo",
+      "owner": "Gneu",
+      "purpose_source": "Open PR #39"
     },
     "Gneu/PokeNinjaGo/codex/fix-windows-export": {
-      "number": 27,
-      "title": "fix: keep Windows export dependencies",
-      "head_branch": "codex/fix-windows-export",
+      "branch": "codex/fix-windows-export",
+      "purpose": "No open PR; inferred from branch name",
       "repo": "Gneu/PokeNinjaGo",
-      "merged_at": "2026-08-31T21:17:31Z",
-      "author": "Gneu",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/27"
+      "owner": "Gneu",
+      "purpose_source": "Latest commit author"
     }
   },
-  "prs": {},
-  "branches": {
-    "Gneu/PokeNinjaGo/codex/fix-windows-export": {
-      "repo": "Gneu/PokeNinjaGo",
-      "purpose": "No open PR; inferred from branch name",
-      "branch": "codex/fix-windows-export",
-      "owner": "Gneu",
-      "purpose_source": "Latest commit author"
+  "stale_branches": {
+    "Gneu/JDM-v3/codex/hunt-14-families": {
+      "head_branch": "codex/hunt-14-families",
+      "merged_at": "2026-08-21T18:35:37Z",
+      "author": "davidoliviersaban",
+      "url": "https://github.com/Gneu/JDM-v3/pull/8",
+      "title": "feat(hunt): expand enemy family system",
+      "number": 8,
+      "repo": "Gneu/JDM-v3"
+    },
+    "Gneu/app-portal/codex/godot-inline-bootstrap": {
+      "head_branch": "codex/godot-inline-bootstrap",
+      "merged_at": "2026-08-24T10:58:12Z",
+      "author": "Gneu",
+      "url": "https://github.com/Gneu/app-portal/pull/21",
+      "title": "fix(portal): allow Godot inline bootstrap",
+      "number": 21,
+      "repo": "Gneu/app-portal"
     },
     "Gneu/app-portal/codex/per-app-visibility": {
-      "repo": "Gneu/app-portal",
-      "purpose": "No open PR; inferred from branch name",
-      "branch": "codex/per-app-visibility",
-      "owner": "Gneu",
-      "purpose_source": "Latest commit author"
+      "head_branch": "codex/per-app-visibility",
+      "merged_at": "2026-08-30T20:55:43Z",
+      "author": "Gneu",
+      "url": "https://github.com/Gneu/app-portal/pull/33",
+      "title": "Add per-app portal visibility administration",
+      "number": 33,
+      "repo": "Gneu/app-portal"
+    },
+    "Gneu/app-portal/codex/pokeninjago-web-route": {
+      "head_branch": "codex/pokeninjago-web-route",
+      "merged_at": "2026-08-24T10:46:30Z",
+      "author": "Gneu",
+      "url": "https://github.com/Gneu/app-portal/pull/19",
+      "title": "feat: publier le playtest Web PokeNinjaGo en privé",
+      "number": 19,
+      "repo": "Gneu/app-portal"
+    },
+    "Gneu/PokemonChessOnline/codex/fix-groq-runtime": {
+      "head_branch": "codex/fix-groq-runtime",
+      "merged_at": "2026-08-30T20:45:34Z",
+      "author": "Gneu",
+      "url": "https://github.com/Gneu/PokemonChessOnline/pull/37",
+      "title": "fix: make Groq game analysis resilient",
+      "number": 37,
+      "repo": "Gneu/PokemonChessOnline"
+    },
+    "Gneu/PokeNinjaGo/codex/fix-windows-export": {
+      "head_branch": "codex/fix-windows-export",
+      "merged_at": "2026-08-31T21:17:31Z",
+      "author": "Gneu",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/27",
+      "title": "fix: keep Windows export dependencies",
+      "number": 27,
+      "repo": "Gneu/PokeNinjaGo"
     },
     "Gneu/PokeNinjaGo/codex/playtest-improvements": {
-      "repo": "Gneu/PokeNinjaGo",
-      "purpose": "No open PR; inferred from branch name",
-      "branch": "codex/playtest-improvements",
-      "owner": "Gneu",
-      "purpose_source": "Latest commit author"
+      "head_branch": "codex/playtest-improvements",
+      "merged_at": "2026-08-24T09:53:13Z",
+      "author": "Gneu",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/22",
+      "title": "feat: implement validated playtest improvements",
+      "number": 22,
+      "repo": "Gneu/PokeNinjaGo"
+    },
+    "Gneu/app-portal/codex/app-portal-steering-sync": {
+      "head_branch": "codex/app-portal-steering-sync",
+      "merged_at": "2026-08-24T10:51:37Z",
+      "author": "Gneu",
+      "url": "https://github.com/Gneu/app-portal/pull/20",
+      "title": "chore(steering): sync Apps Dev instructions",
+      "number": 20,
+      "repo": "Gneu/app-portal"
+    },
+    "Gneu/PokeNinjaGo/codex/art-2d-pipeline": {
+      "head_branch": "codex/art-2d-pipeline",
+      "merged_at": "2026-08-31T21:04:18Z",
+      "author": "Gneu",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/23",
+      "title": "feat: add JRPG visual presentation pipeline",
+      "number": 23,
+      "repo": "Gneu/PokeNinjaGo"
+    }
+  },
+  "prs": {
+    "Gneu/PokeNinjaGo/#38": {
+      "head_branch": "codex/pokemon-evolution-progression",
+      "author": "Gneu",
+      "created_at": "2026-10-02T21:27:10Z",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/38",
+      "title": "docs: define Pokémon evolution progression",
+      "number": 38,
+      "repo": "Gneu/PokeNinjaGo"
+    },
+    "Gneu/PokeNinjaGo/#39": {
+      "head_branch": "codex/pokemon-comfyui-sprites",
+      "author": "Gneu",
+      "created_at": "2026-10-03T02:29:05Z",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/39",
+      "title": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
+      "number": 39,
+      "repo": "Gneu/PokeNinjaGo"
     }
   }
 }

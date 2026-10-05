@@ -112,11 +112,25 @@ function Get-BranchOwnershipAndPurpose {
         }
     }
 
+    # Fetch the latest commit as raw JSON and extract the author in PowerShell.
+    # Passing jq's `//` alternative operator plus a literal string through gh's
+    # --jq flag is brittle (observed: `function not defined: unknown/0`), so we
+    # parse the payload here instead and never let a single branch abort the run.
+    $owner = "unknown"
     $encodedBranch = [System.Uri]::EscapeDataString($Branch)
-    $owner = gh api "repos/$Repo/commits/$encodedBranch" --jq '.author.login // .commit.author.name // "unknown"' 2>$null
-    if ($LASTEXITCODE -ne 0) { throw "Unable to find the latest commit author for '$Branch' in $Repo." }
+    $raw = (gh api "repos/$Repo/commits/$encodedBranch" 2>$null) -join "`n"
+    if ($LASTEXITCODE -eq 0 -and $raw.Trim()) {
+        try {
+            $commit = $raw | ConvertFrom-Json
+            if ($commit.author -and $commit.author.login) { $owner = $commit.author.login }
+            elseif ($commit.commit -and $commit.commit.author -and $commit.commit.author.name) { $owner = $commit.commit.author.name }
+        }
+        catch { $owner = "unknown" }
+    }
+    else {
+        Write-Host "    (could not resolve commit author for '$Branch' in $Repo; defaulting to 'unknown')" -ForegroundColor Yellow
+    }
 
-    $owner = ($owner -join "").Trim()
     if (-not $owner) { $owner = "unknown" }
     return @{ owner = $owner; purpose = "No open PR; inferred from branch name"; source = "Latest commit author" }
 }

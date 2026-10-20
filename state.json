@@ -1,88 +1,88 @@
 {
   "prs": {
-    "Gneu/PokeNinjaGo/#39": {
-      "head_branch": "codex/pokemon-comfyui-sprites",
-      "repo": "Gneu/PokeNinjaGo",
-      "number": 39,
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/39",
-      "created_at": "2026-10-03T02:29:05Z",
-      "title": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
-      "author": "Gneu"
-    },
     "Gneu/HeroQuestOnline/#2": {
-      "head_branch": "codex/appsprod-release-evidence",
       "repo": "Gneu/HeroQuestOnline",
-      "number": 2,
+      "head_branch": "codex/appsprod-release-evidence",
+      "author": "Gneu",
+      "title": "docs: record verified HeroQuest NAS release",
       "url": "https://github.com/Gneu/HeroQuestOnline/pull/2",
       "created_at": "2026-10-07T21:11:42Z",
-      "title": "docs: record verified HeroQuest NAS release",
-      "author": "Gneu"
+      "number": 2
     },
     "Gneu/PokeNinjaGo/#38": {
-      "head_branch": "codex/pokemon-evolution-progression",
       "repo": "Gneu/PokeNinjaGo",
-      "number": 38,
+      "head_branch": "codex/pokemon-evolution-progression",
+      "author": "Gneu",
+      "title": "docs: define Pokémon evolution progression",
       "url": "https://github.com/Gneu/PokeNinjaGo/pull/38",
       "created_at": "2026-10-02T21:27:10Z",
-      "title": "docs: define Pokémon evolution progression",
-      "author": "Gneu"
+      "number": 38
+    },
+    "Gneu/PokeNinjaGo/#39": {
+      "repo": "Gneu/PokeNinjaGo",
+      "head_branch": "codex/pokemon-comfyui-sprites",
+      "author": "Gneu",
+      "title": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/39",
+      "created_at": "2026-10-03T02:29:05Z",
+      "number": 39
     }
   },
   "branches": {
-    "Gneu/HeroQuestOnline/codex/appsprod-release-evidence": {
-      "purpose": "docs: record verified HeroQuest NAS release",
-      "owner": "Gneu",
-      "purpose_source": "Open PR #2",
-      "branch": "codex/appsprod-release-evidence",
-      "repo": "Gneu/HeroQuestOnline"
-    },
     "Gneu/PokeNinjaGo/codex/playtest-improvements": {
-      "purpose": "No open PR; inferred from branch name",
-      "owner": "Gneu",
-      "purpose_source": "Latest commit author",
       "branch": "codex/playtest-improvements",
-      "repo": "Gneu/PokeNinjaGo"
+      "purpose_source": "Latest commit author",
+      "repo": "Gneu/PokeNinjaGo",
+      "owner": "Gneu",
+      "purpose": "No open PR; inferred from branch name"
     },
     "Gneu/PokeNinjaGo/codex/pokemon-comfyui-sprites": {
-      "purpose": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
-      "owner": "Gneu",
-      "purpose_source": "Open PR #39",
       "branch": "codex/pokemon-comfyui-sprites",
-      "repo": "Gneu/PokeNinjaGo"
+      "purpose_source": "Open PR #39",
+      "repo": "Gneu/PokeNinjaGo",
+      "owner": "Gneu",
+      "purpose": "Produce nine ComfyUI poses for all 151 Kanto Pokemon"
     },
     "Gneu/PokeNinjaGo/codex/pokemon-evolution-progression": {
-      "purpose": "docs: define Pokémon evolution progression",
-      "owner": "Gneu",
-      "purpose_source": "Open PR #38",
       "branch": "codex/pokemon-evolution-progression",
-      "repo": "Gneu/PokeNinjaGo"
+      "purpose_source": "Open PR #38",
+      "repo": "Gneu/PokeNinjaGo",
+      "owner": "Gneu",
+      "purpose": "docs: define Pokémon evolution progression"
+    },
+    "Gneu/HeroQuestOnline/codex/appsprod-release-evidence": {
+      "branch": "codex/appsprod-release-evidence",
+      "purpose_source": "Open PR #2",
+      "repo": "Gneu/HeroQuestOnline",
+      "owner": "Gneu",
+      "purpose": "docs: record verified HeroQuest NAS release"
     },
     "Gneu/PokeNinjaGo/codex/fix-windows-export": {
-      "purpose": "No open PR; inferred from branch name",
-      "owner": "Gneu",
-      "purpose_source": "Latest commit author",
       "branch": "codex/fix-windows-export",
-      "repo": "Gneu/PokeNinjaGo"
+      "purpose_source": "Latest commit author",
+      "repo": "Gneu/PokeNinjaGo",
+      "owner": "Gneu",
+      "purpose": "No open PR; inferred from branch name"
     }
   },
   "stale_branches": {
     "Gneu/PokeNinjaGo/codex/playtest-improvements": {
-      "head_branch": "codex/playtest-improvements",
       "repo": "Gneu/PokeNinjaGo",
-      "number": 22,
-      "merged_at": "2026-08-24T09:53:13Z",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/22",
+      "head_branch": "codex/playtest-improvements",
+      "author": "Gneu",
       "title": "feat: implement validated playtest improvements",
-      "author": "Gneu"
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/22",
+      "merged_at": "2026-08-24T09:53:13Z",
+      "number": 22
     },
     "Gneu/PokeNinjaGo/codex/fix-windows-export": {
-      "head_branch": "codex/fix-windows-export",
       "repo": "Gneu/PokeNinjaGo",
-      "number": 27,
-      "merged_at": "2026-08-31T21:17:31Z",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/27",
+      "head_branch": "codex/fix-windows-export",
+      "author": "Gneu",
       "title": "fix: keep Windows export dependencies",
-      "author": "Gneu"
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/27",
+      "merged_at": "2026-08-31T21:17:31Z",
+      "number": 27
     }
   }
 }

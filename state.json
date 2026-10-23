@@ -1,129 +1,81 @@
 {
   "branches": {
     "Gneu/PokeNinjaGo/codex/pokemon-comfyui-sprites": {
-      "purpose": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
+      "owner": "Gneu",
       "purpose_source": "Open PR #39",
       "repo": "Gneu/PokeNinjaGo",
-      "branch": "codex/pokemon-comfyui-sprites",
-      "owner": "Gneu"
-    },
-    "Gneu/PokeNinjaGo/codex/fix-windows-export": {
-      "purpose": "No open PR; inferred from branch name",
-      "purpose_source": "Latest commit author",
-      "repo": "Gneu/PokeNinjaGo",
-      "branch": "codex/fix-windows-export",
-      "owner": "Gneu"
-    },
-    "Gneu/HeroQuestOnline/codex/appsprod-release-evidence": {
-      "purpose": "docs: record verified HeroQuest NAS release",
-      "purpose_source": "Open PR #2",
-      "repo": "Gneu/HeroQuestOnline",
-      "branch": "codex/appsprod-release-evidence",
-      "owner": "Gneu"
-    },
-    "Gneu/FAFC-01/wp-002-conceptual-screen": {
-      "purpose": "WP-002/003: conceptual feasibility, evidence and development-route brief",
-      "purpose_source": "Open PR #2",
-      "repo": "Gneu/FAFC-01",
-      "branch": "wp-002-conceptual-screen",
-      "owner": "Gneu"
-    },
-    "Gneu/PokeNinjaGo/codex/pokemon-evolution-progression": {
-      "purpose": "docs: define Pokémon evolution progression",
-      "purpose_source": "Open PR #38",
-      "repo": "Gneu/PokeNinjaGo",
-      "branch": "codex/pokemon-evolution-progression",
-      "owner": "Gneu"
+      "purpose": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
+      "branch": "codex/pokemon-comfyui-sprites"
     },
     "Gneu/PokeNinjaGo/codex/playtest-improvements": {
-      "purpose": "No open PR; inferred from branch name",
+      "owner": "Gneu",
       "purpose_source": "Latest commit author",
       "repo": "Gneu/PokeNinjaGo",
-      "branch": "codex/playtest-improvements",
-      "owner": "Gneu"
+      "purpose": "No open PR; inferred from branch name",
+      "branch": "codex/playtest-improvements"
     },
-    "Gneu/PokeNinjaGo/codex/combat-playtest-spec": {
-      "purpose": "docs: specify simultaneous combat and visual redesign after playtest",
-      "purpose_source": "Open PR #50",
+    "Gneu/PokeNinjaGo/codex/fix-windows-export": {
+      "owner": "Gneu",
+      "purpose_source": "Latest commit author",
       "repo": "Gneu/PokeNinjaGo",
-      "branch": "codex/combat-playtest-spec",
-      "owner": "Gneu"
+      "purpose": "No open PR; inferred from branch name",
+      "branch": "codex/fix-windows-export"
+    },
+    "Gneu/FAFC-01/wp-002-conceptual-screen": {
+      "owner": "Gneu",
+      "purpose_source": "Open PR #2",
+      "repo": "Gneu/FAFC-01",
+      "purpose": "WP-002/003: conceptual feasibility, evidence and development-route brief",
+      "branch": "wp-002-conceptual-screen"
     }
   },
   "stale_branches": {
     "Gneu/PokeNinjaGo/codex/playtest-improvements": {
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/22",
       "title": "feat: implement validated playtest improvements",
-      "head_branch": "codex/playtest-improvements",
       "repo": "Gneu/PokeNinjaGo",
-      "author": "Gneu",
+      "merged_at": "2026-08-24T09:53:13Z",
+      "head_branch": "codex/playtest-improvements",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/22",
       "number": 22,
-      "merged_at": "2026-08-24T09:53:13Z"
-    },
-    "Gneu/FAFC-01/wp-001-mission-applicability": {
-      "url": "https://github.com/Gneu/FAFC-01/pull/1",
-      "title": "WP-001: mission definition and French/EU applicability review",
-      "head_branch": "wp-001-mission-applicability",
-      "repo": "Gneu/FAFC-01",
-      "author": "Gneu",
-      "number": 1,
-      "merged_at": "2026-10-20T11:54:58Z"
+      "author": "Gneu"
     },
     "Gneu/PokeNinjaGo/codex/fix-windows-export": {
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/27",
       "title": "fix: keep Windows export dependencies",
-      "head_branch": "codex/fix-windows-export",
       "repo": "Gneu/PokeNinjaGo",
-      "author": "Gneu",
+      "merged_at": "2026-08-31T21:17:31Z",
+      "head_branch": "codex/fix-windows-export",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/27",
       "number": 27,
-      "merged_at": "2026-08-31T21:17:31Z"
+      "author": "Gneu"
+    },
+    "Gneu/FAFC-01/wp-001-mission-applicability": {
+      "title": "WP-001: mission definition and French/EU applicability review",
+      "repo": "Gneu/FAFC-01",
+      "merged_at": "2026-10-20T11:54:58Z",
+      "head_branch": "wp-001-mission-applicability",
+      "url": "https://github.com/Gneu/FAFC-01/pull/1",
+      "number": 1,
+      "author": "Gneu"
     }
   },
   "prs": {
-    "Gneu/PokeNinjaGo/#38": {
-      "created_at": "2026-10-02T21:27:10Z",
-      "title": "docs: define Pokémon evolution progression",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/38",
-      "head_branch": "codex/pokemon-evolution-progression",
-      "repo": "Gneu/PokeNinjaGo",
-      "author": "Gneu",
-      "number": 38
-    },
-    "Gneu/HeroQuestOnline/#2": {
-      "created_at": "2026-10-07T21:11:42Z",
-      "title": "docs: record verified HeroQuest NAS release",
-      "url": "https://github.com/Gneu/HeroQuestOnline/pull/2",
-      "head_branch": "codex/appsprod-release-evidence",
-      "repo": "Gneu/HeroQuestOnline",
-      "author": "Gneu",
-      "number": 2
-    },
     "Gneu/PokeNinjaGo/#39": {
-      "created_at": "2026-10-03T02:29:05Z",
       "title": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/39",
+      "repo": "Gneu/PokeNinjaGo",
       "head_branch": "codex/pokemon-comfyui-sprites",
-      "repo": "Gneu/PokeNinjaGo",
-      "author": "Gneu",
-      "number": 39
-    },
-    "Gneu/PokeNinjaGo/#50": {
-      "created_at": "2026-10-22T09:38:17Z",
-      "title": "docs: specify simultaneous combat and visual redesign after playtest",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/50",
-      "head_branch": "codex/combat-playtest-spec",
-      "repo": "Gneu/PokeNinjaGo",
-      "author": "Gneu",
-      "number": 50
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/39",
+      "created_at": "2026-10-03T02:29:05Z",
+      "number": 39,
+      "author": "Gneu"
     },
     "Gneu/FAFC-01/#2": {
-      "created_at": "2026-10-20T12:07:12Z",
       "title": "WP-002/003: conceptual feasibility, evidence and development-route brief",
-      "url": "https://github.com/Gneu/FAFC-01/pull/2",
-      "head_branch": "wp-002-conceptual-screen",
       "repo": "Gneu/FAFC-01",
-      "author": "Gneu",
-      "number": 2
+      "head_branch": "wp-002-conceptual-screen",
+      "url": "https://github.com/Gneu/FAFC-01/pull/2",
+      "created_at": "2026-10-20T12:07:12Z",
+      "number": 2,
+      "author": "Gneu"
     }
   }
 }

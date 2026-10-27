@@ -1,97 +1,97 @@
 {
+  "prs": {
+    "Gneu/PokeNinjaGo/#39": {
+      "title": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
+      "number": 39,
+      "author": "Gneu",
+      "head_branch": "codex/pokemon-comfyui-sprites",
+      "created_at": "2026-10-03T02:29:05Z",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/39",
+      "repo": "Gneu/PokeNinjaGo"
+    },
+    "Gneu/blssed-by-rpp-template/#5": {
+      "title": "Add BC04 mix/mastering course summary (steering)",
+      "number": 5,
+      "author": "Gneu",
+      "head_branch": "kiro/bc04-course-notes",
+      "created_at": "2026-10-24T14:41:42Z",
+      "url": "https://github.com/Gneu/blssed-by-rpp-template/pull/5",
+      "repo": "Gneu/blssed-by-rpp-template"
+    },
+    "Gneu/FAFC-01/#2": {
+      "title": "WP-002/003: conceptual feasibility, evidence and development-route brief",
+      "number": 2,
+      "author": "Gneu",
+      "head_branch": "wp-002-conceptual-screen",
+      "created_at": "2026-10-20T12:07:12Z",
+      "url": "https://github.com/Gneu/FAFC-01/pull/2",
+      "repo": "Gneu/FAFC-01"
+    }
+  },
   "stale_branches": {
     "Gneu/FAFC-01/wp-001-mission-applicability": {
-      "number": 1,
-      "repo": "Gneu/FAFC-01",
       "merged_at": "2026-10-20T11:54:58Z",
       "title": "WP-001: mission definition and French/EU applicability review",
-      "url": "https://github.com/Gneu/FAFC-01/pull/1",
+      "number": 1,
+      "author": "Gneu",
       "head_branch": "wp-001-mission-applicability",
-      "author": "Gneu"
-    },
-    "Gneu/PokeNinjaGo/codex/playtest-improvements": {
-      "number": 22,
-      "repo": "Gneu/PokeNinjaGo",
-      "merged_at": "2026-08-24T09:53:13Z",
-      "title": "feat: implement validated playtest improvements",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/22",
-      "head_branch": "codex/playtest-improvements",
-      "author": "Gneu"
+      "url": "https://github.com/Gneu/FAFC-01/pull/1",
+      "repo": "Gneu/FAFC-01"
     },
     "Gneu/PokeNinjaGo/codex/fix-windows-export": {
-      "number": 27,
-      "repo": "Gneu/PokeNinjaGo",
       "merged_at": "2026-08-31T21:17:31Z",
       "title": "fix: keep Windows export dependencies",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/27",
+      "number": 27,
+      "author": "Gneu",
       "head_branch": "codex/fix-windows-export",
-      "author": "Gneu"
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/27",
+      "repo": "Gneu/PokeNinjaGo"
+    },
+    "Gneu/PokeNinjaGo/codex/playtest-improvements": {
+      "merged_at": "2026-08-24T09:53:13Z",
+      "title": "feat: implement validated playtest improvements",
+      "number": 22,
+      "author": "Gneu",
+      "head_branch": "codex/playtest-improvements",
+      "url": "https://github.com/Gneu/PokeNinjaGo/pull/22",
+      "repo": "Gneu/PokeNinjaGo"
     }
   },
   "branches": {
-    "Gneu/FAFC-01/wp-002-conceptual-screen": {
-      "purpose_source": "Open PR #2",
-      "purpose": "WP-002/003: conceptual feasibility, evidence and development-route brief",
-      "repo": "Gneu/FAFC-01",
-      "owner": "Gneu",
-      "branch": "wp-002-conceptual-screen"
-    },
     "Gneu/PokeNinjaGo/codex/pokemon-comfyui-sprites": {
-      "purpose_source": "Open PR #39",
+      "branch": "codex/pokemon-comfyui-sprites",
       "purpose": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
       "repo": "Gneu/PokeNinjaGo",
-      "owner": "Gneu",
-      "branch": "codex/pokemon-comfyui-sprites"
+      "purpose_source": "Open PR #39",
+      "owner": "Gneu"
     },
-    "Gneu/PokeNinjaGo/codex/playtest-improvements": {
-      "purpose_source": "Latest commit author",
-      "purpose": "No open PR; inferred from branch name",
-      "repo": "Gneu/PokeNinjaGo",
-      "owner": "Gneu",
-      "branch": "codex/playtest-improvements"
-    },
-    "Gneu/blssed-by-rpp-template/kiro/bc04-course-notes": {
-      "purpose_source": "Open PR #5",
-      "purpose": "Add BC04 mix/mastering course summary (steering)",
-      "repo": "Gneu/blssed-by-rpp-template",
-      "owner": "Gneu",
-      "branch": "kiro/bc04-course-notes"
+    "Gneu/FAFC-01/wp-002-conceptual-screen": {
+      "branch": "wp-002-conceptual-screen",
+      "purpose": "WP-002/003: conceptual feasibility, evidence and development-route brief",
+      "repo": "Gneu/FAFC-01",
+      "purpose_source": "Open PR #2",
+      "owner": "Gneu"
     },
     "Gneu/PokeNinjaGo/codex/fix-windows-export": {
-      "purpose_source": "Latest commit author",
+      "branch": "codex/fix-windows-export",
       "purpose": "No open PR; inferred from branch name",
       "repo": "Gneu/PokeNinjaGo",
-      "owner": "Gneu",
-      "branch": "codex/fix-windows-export"
-    }
-  },
-  "prs": {
-    "Gneu/FAFC-01/#2": {
-      "number": 2,
-      "repo": "Gneu/FAFC-01",
-      "created_at": "2026-10-20T12:07:12Z",
-      "title": "WP-002/003: conceptual feasibility, evidence and development-route brief",
-      "url": "https://github.com/Gneu/FAFC-01/pull/2",
-      "head_branch": "wp-002-conceptual-screen",
-      "author": "Gneu"
+      "purpose_source": "Latest commit author",
+      "owner": "Gneu"
     },
-    "Gneu/PokeNinjaGo/#39": {
-      "number": 39,
+    "Gneu/PokeNinjaGo/codex/playtest-improvements": {
+      "branch": "codex/playtest-improvements",
+      "purpose": "No open PR; inferred from branch name",
       "repo": "Gneu/PokeNinjaGo",
-      "created_at": "2026-10-03T02:29:05Z",
-      "title": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/39",
-      "head_branch": "codex/pokemon-comfyui-sprites",
-      "author": "Gneu"
+      "purpose_source": "Latest commit author",
+      "owner": "Gneu"
     },
-    "Gneu/blssed-by-rpp-template/#5": {
-      "number": 5,
+    "Gneu/blssed-by-rpp-template/kiro/bc04-course-notes": {
+      "branch": "kiro/bc04-course-notes",
+      "purpose": "Add BC04 mix/mastering course summary (steering)",
       "repo": "Gneu/blssed-by-rpp-template",
-      "created_at": "2026-10-24T14:41:42Z",
-      "title": "Add BC04 mix/mastering course summary (steering)",
-      "url": "https://github.com/Gneu/blssed-by-rpp-template/pull/5",
-      "head_branch": "kiro/bc04-course-notes",
-      "author": "Gneu"
+      "purpose_source": "Open PR #5",
+      "owner": "Gneu"
     }
   }
 }

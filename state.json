@@ -1,97 +1,106 @@
 {
-  "prs": {
-    "Gneu/PokeNinjaGo/#39": {
-      "title": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
-      "number": 39,
-      "author": "Gneu",
-      "head_branch": "codex/pokemon-comfyui-sprites",
-      "created_at": "2026-10-03T02:29:05Z",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/39",
-      "repo": "Gneu/PokeNinjaGo"
+  "branches": {
+    "fabricerosset/PokeNinjaGo/codex/pokemon-comfyui-sprites": {
+      "branch": "codex/pokemon-comfyui-sprites",
+      "purpose": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
+      "purpose_source": "Open PR #39",
+      "owner": "fabricerosset",
+      "repo": "fabricerosset/PokeNinjaGo"
     },
-    "Gneu/blssed-by-rpp-template/#5": {
-      "title": "Add BC04 mix/mastering course summary (steering)",
-      "number": 5,
-      "author": "Gneu",
-      "head_branch": "kiro/bc04-course-notes",
-      "created_at": "2026-10-24T14:41:42Z",
-      "url": "https://github.com/Gneu/blssed-by-rpp-template/pull/5",
-      "repo": "Gneu/blssed-by-rpp-template"
+    "fabricerosset/PokeNinjaGo/codex/playtest-improvements": {
+      "branch": "codex/playtest-improvements",
+      "purpose": "No open PR; inferred from branch name",
+      "purpose_source": "Latest commit author",
+      "owner": "fabricerosset",
+      "repo": "fabricerosset/PokeNinjaGo"
     },
-    "Gneu/FAFC-01/#2": {
-      "title": "WP-002/003: conceptual feasibility, evidence and development-route brief",
-      "number": 2,
-      "author": "Gneu",
-      "head_branch": "wp-002-conceptual-screen",
-      "created_at": "2026-10-20T12:07:12Z",
-      "url": "https://github.com/Gneu/FAFC-01/pull/2",
-      "repo": "Gneu/FAFC-01"
+    "fabricerosset/PokeNinjaGo/codex/fix-windows-export": {
+      "branch": "codex/fix-windows-export",
+      "purpose": "No open PR; inferred from branch name",
+      "purpose_source": "Latest commit author",
+      "owner": "fabricerosset",
+      "repo": "fabricerosset/PokeNinjaGo"
+    },
+    "fabricerosset/blssed-by-rpp-template/kiro/bc04-course-notes": {
+      "branch": "kiro/bc04-course-notes",
+      "purpose": "Add BC04 mix/mastering course summary (steering)",
+      "purpose_source": "Open PR #5",
+      "owner": "fabricerosset",
+      "repo": "fabricerosset/blssed-by-rpp-template"
+    },
+    "fabricerosset/FAFC-01/wp-002-conceptual-screen": {
+      "branch": "wp-002-conceptual-screen",
+      "purpose": "WP-002/003: conceptual feasibility, evidence and development-route brief",
+      "purpose_source": "Open PR #2",
+      "owner": "fabricerosset",
+      "repo": "fabricerosset/FAFC-01"
     }
   },
   "stale_branches": {
-    "Gneu/FAFC-01/wp-001-mission-applicability": {
-      "merged_at": "2026-10-20T11:54:58Z",
+    "fabricerosset/FAFC-01/wp-001-mission-applicability": {
+      "url": "https://github.com/fabricerosset/FAFC-01/pull/1",
+      "repo": "fabricerosset/FAFC-01",
       "title": "WP-001: mission definition and French/EU applicability review",
+      "author": "fabricerosset",
+      "merged_at": "2026-10-20T11:54:58Z",
       "number": 1,
-      "author": "Gneu",
-      "head_branch": "wp-001-mission-applicability",
-      "url": "https://github.com/Gneu/FAFC-01/pull/1",
-      "repo": "Gneu/FAFC-01"
+      "head_branch": "wp-001-mission-applicability"
     },
-    "Gneu/PokeNinjaGo/codex/fix-windows-export": {
-      "merged_at": "2026-08-31T21:17:31Z",
-      "title": "fix: keep Windows export dependencies",
-      "number": 27,
-      "author": "Gneu",
-      "head_branch": "codex/fix-windows-export",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/27",
-      "repo": "Gneu/PokeNinjaGo"
+    "fabricerosset/app-portal/codex/astranvil-prod-games-cutover": {
+      "url": "https://github.com/fabricerosset/app-portal/pull/56",
+      "repo": "fabricerosset/app-portal",
+      "title": "Remove game deployments from AppsProd portal",
+      "author": "fabricerosset",
+      "merged_at": "2026-10-28T09:24:19Z",
+      "number": 56,
+      "head_branch": "codex/astranvil-prod-games-cutover"
     },
-    "Gneu/PokeNinjaGo/codex/playtest-improvements": {
-      "merged_at": "2026-08-24T09:53:13Z",
+    "fabricerosset/PokeNinjaGo/codex/playtest-improvements": {
+      "url": "https://github.com/fabricerosset/PokeNinjaGo/pull/22",
+      "repo": "fabricerosset/PokeNinjaGo",
       "title": "feat: implement validated playtest improvements",
+      "author": "fabricerosset",
+      "merged_at": "2026-08-24T09:53:13Z",
       "number": 22,
-      "author": "Gneu",
-      "head_branch": "codex/playtest-improvements",
-      "url": "https://github.com/Gneu/PokeNinjaGo/pull/22",
-      "repo": "Gneu/PokeNinjaGo"
+      "head_branch": "codex/playtest-improvements"
+    },
+    "fabricerosset/PokeNinjaGo/codex/fix-windows-export": {
+      "url": "https://github.com/fabricerosset/PokeNinjaGo/pull/27",
+      "repo": "fabricerosset/PokeNinjaGo",
+      "title": "fix: keep Windows export dependencies",
+      "author": "fabricerosset",
+      "merged_at": "2026-08-31T21:17:31Z",
+      "number": 27,
+      "head_branch": "codex/fix-windows-export"
     }
   },
-  "branches": {
-    "Gneu/PokeNinjaGo/codex/pokemon-comfyui-sprites": {
-      "branch": "codex/pokemon-comfyui-sprites",
-      "purpose": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
-      "repo": "Gneu/PokeNinjaGo",
-      "purpose_source": "Open PR #39",
-      "owner": "Gneu"
+  "prs": {
+    "fabricerosset/PokeNinjaGo/#39": {
+      "url": "https://github.com/fabricerosset/PokeNinjaGo/pull/39",
+      "repo": "fabricerosset/PokeNinjaGo",
+      "title": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
+      "created_at": "2026-10-03T02:29:05Z",
+      "author": "fabricerosset",
+      "number": 39,
+      "head_branch": "codex/pokemon-comfyui-sprites"
     },
-    "Gneu/FAFC-01/wp-002-conceptual-screen": {
-      "branch": "wp-002-conceptual-screen",
-      "purpose": "WP-002/003: conceptual feasibility, evidence and development-route brief",
-      "repo": "Gneu/FAFC-01",
-      "purpose_source": "Open PR #2",
-      "owner": "Gneu"
+    "fabricerosset/FAFC-01/#2": {
+      "url": "https://github.com/fabricerosset/FAFC-01/pull/2",
+      "repo": "fabricerosset/FAFC-01",
+      "title": "WP-002/003: conceptual feasibility, evidence and development-route brief",
+      "created_at": "2026-10-20T12:07:12Z",
+      "author": "fabricerosset",
+      "number": 2,
+      "head_branch": "wp-002-conceptual-screen"
     },
-    "Gneu/PokeNinjaGo/codex/fix-windows-export": {
-      "branch": "codex/fix-windows-export",
-      "purpose": "No open PR; inferred from branch name",
-      "repo": "Gneu/PokeNinjaGo",
-      "purpose_source": "Latest commit author",
-      "owner": "Gneu"
-    },
-    "Gneu/PokeNinjaGo/codex/playtest-improvements": {
-      "branch": "codex/playtest-improvements",
-      "purpose": "No open PR; inferred from branch name",
-      "repo": "Gneu/PokeNinjaGo",
-      "purpose_source": "Latest commit author",
-      "owner": "Gneu"
-    },
-    "Gneu/blssed-by-rpp-template/kiro/bc04-course-notes": {
-      "branch": "kiro/bc04-course-notes",
-      "purpose": "Add BC04 mix/mastering course summary (steering)",
-      "repo": "Gneu/blssed-by-rpp-template",
-      "purpose_source": "Open PR #5",
-      "owner": "Gneu"
+    "fabricerosset/blssed-by-rpp-template/#5": {
+      "url": "https://github.com/fabricerosset/blssed-by-rpp-template/pull/5",
+      "repo": "fabricerosset/blssed-by-rpp-template",
+      "title": "Add BC04 mix/mastering course summary (steering)",
+      "created_at": "2026-10-24T14:41:42Z",
+      "author": "fabricerosset",
+      "number": 5,
+      "head_branch": "kiro/bc04-course-notes"
     }
   }
 }

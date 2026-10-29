@@ -1,106 +1,122 @@
 {
   "branches": {
+    "fabricerosset/HeroQuestOnline/codex/telor-campaign": {
+      "owner": "fabricerosset",
+      "purpose": "feat: préparation et règles du porteur de Telor",
+      "purpose_source": "Open PR #34",
+      "branch": "codex/telor-campaign",
+      "repo": "fabricerosset/HeroQuestOnline"
+    },
+    "fabricerosset/PokeNinjaGo/codex/fix-windows-export": {
+      "owner": "fabricerosset",
+      "purpose": "No open PR; inferred from branch name",
+      "purpose_source": "Latest commit author",
+      "branch": "codex/fix-windows-export",
+      "repo": "fabricerosset/PokeNinjaGo"
+    },
     "fabricerosset/PokeNinjaGo/codex/pokemon-comfyui-sprites": {
-      "branch": "codex/pokemon-comfyui-sprites",
+      "owner": "fabricerosset",
       "purpose": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
       "purpose_source": "Open PR #39",
-      "owner": "fabricerosset",
+      "branch": "codex/pokemon-comfyui-sprites",
       "repo": "fabricerosset/PokeNinjaGo"
-    },
-    "fabricerosset/PokeNinjaGo/codex/playtest-improvements": {
-      "branch": "codex/playtest-improvements",
-      "purpose": "No open PR; inferred from branch name",
-      "purpose_source": "Latest commit author",
-      "owner": "fabricerosset",
-      "repo": "fabricerosset/PokeNinjaGo"
-    },
-    "fabricerosset/PokeNinjaGo/codex/fix-windows-export": {
-      "branch": "codex/fix-windows-export",
-      "purpose": "No open PR; inferred from branch name",
-      "purpose_source": "Latest commit author",
-      "owner": "fabricerosset",
-      "repo": "fabricerosset/PokeNinjaGo"
-    },
-    "fabricerosset/blssed-by-rpp-template/kiro/bc04-course-notes": {
-      "branch": "kiro/bc04-course-notes",
-      "purpose": "Add BC04 mix/mastering course summary (steering)",
-      "purpose_source": "Open PR #5",
-      "owner": "fabricerosset",
-      "repo": "fabricerosset/blssed-by-rpp-template"
     },
     "fabricerosset/FAFC-01/wp-002-conceptual-screen": {
-      "branch": "wp-002-conceptual-screen",
+      "owner": "fabricerosset",
       "purpose": "WP-002/003: conceptual feasibility, evidence and development-route brief",
       "purpose_source": "Open PR #2",
-      "owner": "fabricerosset",
+      "branch": "wp-002-conceptual-screen",
       "repo": "fabricerosset/FAFC-01"
-    }
-  },
-  "stale_branches": {
-    "fabricerosset/FAFC-01/wp-001-mission-applicability": {
-      "url": "https://github.com/fabricerosset/FAFC-01/pull/1",
-      "repo": "fabricerosset/FAFC-01",
-      "title": "WP-001: mission definition and French/EU applicability review",
-      "author": "fabricerosset",
-      "merged_at": "2026-10-20T11:54:58Z",
-      "number": 1,
-      "head_branch": "wp-001-mission-applicability"
     },
-    "fabricerosset/app-portal/codex/astranvil-prod-games-cutover": {
-      "url": "https://github.com/fabricerosset/app-portal/pull/56",
-      "repo": "fabricerosset/app-portal",
-      "title": "Remove game deployments from AppsProd portal",
-      "author": "fabricerosset",
-      "merged_at": "2026-10-28T09:24:19Z",
-      "number": 56,
-      "head_branch": "codex/astranvil-prod-games-cutover"
+    "fabricerosset/blssed-by-rpp-template/kiro/bc04-course-notes": {
+      "owner": "fabricerosset",
+      "purpose": "Add BC04 mix/mastering course summary (steering)",
+      "purpose_source": "Open PR #5",
+      "branch": "kiro/bc04-course-notes",
+      "repo": "fabricerosset/blssed-by-rpp-template"
     },
     "fabricerosset/PokeNinjaGo/codex/playtest-improvements": {
-      "url": "https://github.com/fabricerosset/PokeNinjaGo/pull/22",
-      "repo": "fabricerosset/PokeNinjaGo",
-      "title": "feat: implement validated playtest improvements",
-      "author": "fabricerosset",
-      "merged_at": "2026-08-24T09:53:13Z",
-      "number": 22,
-      "head_branch": "codex/playtest-improvements"
-    },
-    "fabricerosset/PokeNinjaGo/codex/fix-windows-export": {
-      "url": "https://github.com/fabricerosset/PokeNinjaGo/pull/27",
-      "repo": "fabricerosset/PokeNinjaGo",
-      "title": "fix: keep Windows export dependencies",
-      "author": "fabricerosset",
-      "merged_at": "2026-08-31T21:17:31Z",
-      "number": 27,
-      "head_branch": "codex/fix-windows-export"
+      "owner": "fabricerosset",
+      "purpose": "No open PR; inferred from branch name",
+      "purpose_source": "Latest commit author",
+      "branch": "codex/playtest-improvements",
+      "repo": "fabricerosset/PokeNinjaGo"
     }
   },
   "prs": {
+    "fabricerosset/HeroQuestOnline/#34": {
+      "title": "feat: préparation et règles du porteur de Telor",
+      "author": "fabricerosset",
+      "number": 34,
+      "url": "https://github.com/fabricerosset/HeroQuestOnline/pull/34",
+      "head_branch": "codex/telor-campaign",
+      "repo": "fabricerosset/HeroQuestOnline",
+      "created_at": "2026-10-29T02:24:47Z"
+    },
     "fabricerosset/PokeNinjaGo/#39": {
-      "url": "https://github.com/fabricerosset/PokeNinjaGo/pull/39",
-      "repo": "fabricerosset/PokeNinjaGo",
       "title": "Produce nine ComfyUI poses for all 151 Kanto Pokemon",
-      "created_at": "2026-10-03T02:29:05Z",
       "author": "fabricerosset",
       "number": 39,
-      "head_branch": "codex/pokemon-comfyui-sprites"
-    },
-    "fabricerosset/FAFC-01/#2": {
-      "url": "https://github.com/fabricerosset/FAFC-01/pull/2",
-      "repo": "fabricerosset/FAFC-01",
-      "title": "WP-002/003: conceptual feasibility, evidence and development-route brief",
-      "created_at": "2026-10-20T12:07:12Z",
-      "author": "fabricerosset",
-      "number": 2,
-      "head_branch": "wp-002-conceptual-screen"
+      "url": "https://github.com/fabricerosset/PokeNinjaGo/pull/39",
+      "head_branch": "codex/pokemon-comfyui-sprites",
+      "repo": "fabricerosset/PokeNinjaGo",
+      "created_at": "2026-10-03T02:29:05Z"
     },
     "fabricerosset/blssed-by-rpp-template/#5": {
-      "url": "https://github.com/fabricerosset/blssed-by-rpp-template/pull/5",
-      "repo": "fabricerosset/blssed-by-rpp-template",
       "title": "Add BC04 mix/mastering course summary (steering)",
-      "created_at": "2026-10-24T14:41:42Z",
       "author": "fabricerosset",
       "number": 5,
-      "head_branch": "kiro/bc04-course-notes"
+      "url": "https://github.com/fabricerosset/blssed-by-rpp-template/pull/5",
+      "head_branch": "kiro/bc04-course-notes",
+      "repo": "fabricerosset/blssed-by-rpp-template",
+      "created_at": "2026-10-24T14:41:42Z"
+    },
+    "fabricerosset/FAFC-01/#2": {
+      "title": "WP-002/003: conceptual feasibility, evidence and development-route brief",
+      "author": "fabricerosset",
+      "number": 2,
+      "url": "https://github.com/fabricerosset/FAFC-01/pull/2",
+      "head_branch": "wp-002-conceptual-screen",
+      "repo": "fabricerosset/FAFC-01",
+      "created_at": "2026-10-20T12:07:12Z"
+    }
+  },
+  "stale_branches": {
+    "fabricerosset/app-portal/codex/astranvil-prod-games-cutover": {
+      "title": "Remove game deployments from AppsProd portal",
+      "author": "fabricerosset",
+      "url": "https://github.com/fabricerosset/app-portal/pull/56",
+      "number": 56,
+      "merged_at": "2026-10-28T09:24:19Z",
+      "head_branch": "codex/astranvil-prod-games-cutover",
+      "repo": "fabricerosset/app-portal"
+    },
+    "fabricerosset/PokeNinjaGo/codex/fix-windows-export": {
+      "title": "fix: keep Windows export dependencies",
+      "author": "fabricerosset",
+      "url": "https://github.com/fabricerosset/PokeNinjaGo/pull/27",
+      "number": 27,
+      "merged_at": "2026-08-31T21:17:31Z",
+      "head_branch": "codex/fix-windows-export",
+      "repo": "fabricerosset/PokeNinjaGo"
+    },
+    "fabricerosset/FAFC-01/wp-001-mission-applicability": {
+      "title": "WP-001: mission definition and French/EU applicability review",
+      "author": "fabricerosset",
+      "url": "https://github.com/fabricerosset/FAFC-01/pull/1",
+      "number": 1,
+      "merged_at": "2026-10-20T11:54:58Z",
+      "head_branch": "wp-001-mission-applicability",
+      "repo": "fabricerosset/FAFC-01"
+    },
+    "fabricerosset/PokeNinjaGo/codex/playtest-improvements": {
+      "title": "feat: implement validated playtest improvements",
+      "author": "fabricerosset",
+      "url": "https://github.com/fabricerosset/PokeNinjaGo/pull/22",
+      "number": 22,
+      "merged_at": "2026-08-24T09:53:13Z",
+      "head_branch": "codex/playtest-improvements",
+      "repo": "fabricerosset/PokeNinjaGo"
     }
   }
 }
